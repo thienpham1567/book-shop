@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import './App.scss'
-import ComicAndGraphicNovels from './pages/Categories/Fiction/ComicAndGraphicNovels'
+import NavBar from './components/Navbar/NavBar';
+import Hero from './components/Hero/Hero'
 
 function App() {
 
   return (
     <div className="App">
-
+      <NavBar />
     </div>
   )
 }
