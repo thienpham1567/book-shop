@@ -46,7 +46,9 @@ const NavBar = () => {
                 Choose a Bookstore
               </p>
               <Button variant="outline-secondary d-none d-lg-flex">
-                Sign in
+                <span className='w-100'>
+                  Sign in
+                </span>
               </Button>
               <span className="fs-4 d-lg-none">
                 <i className="fa-solid fa-circle-user"></i>
@@ -69,7 +71,9 @@ const NavBar = () => {
               aria-labelledby={`navbar-lg`}
               placement="end"
             >
-              <Offcanvas.Header closeButton></Offcanvas.Header>
+              <Offcanvas.Header closeButton>
+                <img src="https://images-production.bookshop.org/spree/curators/avatars/10/thumb/Social_media_Icon_alternative.jpg?1573251482" alt="logo" className='logo' />
+              </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-center flex-grow-1 gap-5">
                   <Link to="/" className="nav-link nav-link-hover">
@@ -110,11 +114,12 @@ const NavBar = () => {
                       </div>
                     </div>
                   </NavDropdown> */}
+                  {/* Fiction */}
                   <div className="nav-item show dropdown">
                     <Link to='/fiction' id="offcanvasNavbarDropdown-expand-lg"
                       aria-expanded="true"
                       role="button"
-                      className="dropdown-toggle nav-link nav-link-hover"
+                      className="dropdown-toggle nav-link nav-link-hover "
                     >Fiction
 
                     </Link>
@@ -123,7 +128,7 @@ const NavBar = () => {
                       data-bs-popper="static"
                       className="dropdown-menu show"
                     >
-                      <div className="d-flex align-items-center justify-content-center shadow-sm">
+                      <div className="d-sm-flex align-items-center justify-content-center">
                         <div className="links">
                           <Link to="/" className="nav-link">
                             Romance
@@ -149,15 +154,46 @@ const NavBar = () => {
                       </div>
                     </div>
                   </div>
-                  <NavDropdown
-                    title="Nonfiction"
-                    id={`offcanvasNavbarDropdown-expand-lg`}
-                  >
-                    <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action4">
-                      Another action
-                    </NavDropdown.Item>
-                  </NavDropdown>
+                  {/* Nonfiction */}
+                  <div className="nav-item show dropdown">
+                    <Link to='/fiction' id="offcanvasNavbarDropdown-expand-lg"
+                      aria-expanded="true"
+                      role="button"
+                      className="dropdown-toggle nav-link nav-link-hover "
+                    >Nonfiction
+
+                    </Link>
+                    <div
+                      aria-labelledby="offcanvasNavbarDropdown-expand-lg"
+                      data-bs-popper="static"
+                      className="dropdown-menu show"
+                    >
+                      <div className="d-sm-flex align-items-center justify-content-center w-100">
+                        <div className="links">
+                          <Link to="/" className="nav-link">
+                            Travel
+                          </Link>
+                          <Link to="/" className="nav-link">
+                            Arts & Photography
+                          </Link>
+                          <Link to="/" className="nav-link">
+                            Business & Investing
+                          </Link>
+                        </div>
+                        <div className="links">
+                          <Link to="/" className="nav-link">
+                            Cooking & Wine
+                          </Link>
+                          <Link to="/" className="nav-link">
+                            History
+                          </Link>
+                          <Link to="/" className="nav-link">
+                            Science & Technology
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <Link to="/" className="nav-link nav-link-hover">
                     Kids
                   </Link>

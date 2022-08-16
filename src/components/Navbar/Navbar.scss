@@ -59,7 +59,7 @@
           i {
             cursor: pointer;
             font-size: 1.2rem;
-            color: rgb(88, 88, 88);
+            color: rgb(154, 82, 179);
           }
 
           .quantity {
@@ -68,13 +68,13 @@
             justify-content: center;
             font-size: .8rem;
             font-weight: 600;
-            width: 1.5rem;
-            height: 1.5rem;
-            background-color: rgb(245, 245, 245);
+            width: 1.4rem;
+            height: 1.4rem;
+            background-color: rgb(240, 240, 240);
             position: absolute;
             border-radius: 50%;
-            top: -.8rem;
-            right: -.8rem;
+            top: -.7rem;
+            right: -.7rem;
           }
         }
       }
@@ -96,21 +96,25 @@
 
 .offcanvas {
   .offcanvas-header {
+    .logo {
+      width: 2.5rem;
+      border-radius: 50%;
+    }
+
     .btn-close {
       background-image: url('https://rails-assets-us.bookshop.org/assets/close-7c90c1bf09be468c6cbc40e3f3d300b94ab697da4bf80842fe28adfc83b5a2fb.svg');
       background-repeat: no-repeat;
       background-size: cover;
-      background-color: white !important;
       border-radius: 50%;
-      margin-top: .5rem;
     }
   }
 
   .offcanvas-body {
+    padding-top: 0 !important;
 
     .navbar-nav {
       .nav-link-hover {
-        color: rgb(104, 104, 104);
+        color: rgb(70, 70, 70);
         padding-left: 0;
         padding-right: 0;
         margin-bottom: -.5rem;
@@ -131,12 +135,12 @@
 
       &:hover {
         .dropdown-menu {
-          visibility: visible;
+          display: block;
         }
       }
 
       .dropdown-menu {
-        visibility: hidden;
+        display: none;
         padding: 0;
         width: 35rem;
         top: 2.5rem;
@@ -170,16 +174,30 @@
 // Decorate navbar when it go down to 992px
 @media screen and (max-width:992px) {
   .offcanvas {
+    width: 100% !important;
+
     .offcanvas-body {
+      padding: 1rem 0;
 
       .navbar-nav {
-        .nav-link-hover {
-          border-bottom: 4px solid aqua;
-        }
-      }
+        gap: 0 !important;
 
-      .dropdown {
-        .dropdown-menu {}
+        &:last-child {
+          border-bottom: 1px solid rgb(220, 220, 220);
+        }
+
+        .nav-link-hover {
+          width: inherit;
+          border-top: 1px solid rgb(220, 220, 220);
+          padding: .8rem 1rem;
+          margin-bottom: 0rem;
+          border-bottom: none;
+
+          &:hover {
+            background-color: rgb(240, 240, 240);
+            border-bottom: none;
+          }
+        }
       }
     }
   }
@@ -194,6 +212,23 @@
       .row {
         .search-input {
           padding-left: 1.5rem;
+        }
+      }
+    }
+  }
+
+  .offcanvas {
+    width: 100% !important;
+
+    .offcanvas-body {
+
+      .dropdown {
+        .dropdown-menu {
+          padding: 1rem 0;
+
+          .links {
+            padding: 0 1rem;
+          }
         }
       }
     }
