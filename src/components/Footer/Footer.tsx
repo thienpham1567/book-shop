@@ -34,6 +34,8 @@ const Footer = () => {
             <Link to="/" className='nav-link text-light'>Bookshop For Bookstores</Link>
             <Link to="/" className='nav-link text-light'>Contact</Link>
             <Link to="/" className='nav-link text-light'>Return and Refund Policy</Link>
+            <Link to="/" className="nav-link text-light fw-normal d-block d-md-none">Term of Use</Link>
+            <Link to="/" className="nav-link text-light fw-normal d-block d-md-none">Privacy Notice</Link>
           </div>
         </Col>
         <Col sm={12} md={4} className="d-flex flex-column justify-content-center align-items-center justify-content-md-end align-items-md-end">
@@ -44,7 +46,7 @@ const Footer = () => {
             <img src="https://rails-assets-us.bookshop.org/assets/icon-instagram-015ea6b8500fb243a606a5117772f949603f9d035d5ab677b7d24a6f379e3cbe.svg" alt="" />
           </div>
           <div className="mt-2 d-flex flex-column media-payment">
-            <p className="fw-normal text-light text-center fs-5">Payments Accepted</p>
+            <p className="fw-normal text-light text-center">Payments Accepted</p>
             <img src="https://rails-assets-us.bookshop.org/assets/payment_methods-a0a4f59e2dde1469a5f84fa9a6462171db755cdb0dcdf8ce8bd2dc8ecb6fa03f.png" alt="payments" className="" />
             <img src="https://rails-assets-us.bookshop.org/assets/bcorp_logo-dbd633d3bd3540edec0d2271427738792bd79e1aae13585deec0b658d29ddc08.png" alt="certified" className="" />
           </div>
@@ -53,8 +55,8 @@ const Footer = () => {
       <Row className="pb-4">
         <Col className='d-flex justify-content-center align-items-center gap-5'>
           <p className="text-light fw-normal">&copy; 2022 All Rights Reserved</p>
-          <Link to="/" className="nav-link text-light fw-normal">Term of Use</Link>
-          <Link to="/" className="nav-link text-light fw-normal">Privacy Notice</Link>
+          <Link to="/" className="nav-link text-light fw-normal d-none d-md-block">Term of Use</Link>
+          <Link to="/" className="nav-link text-light fw-normal d-none d-md-block">Privacy Notice</Link>
         </Col>
       </Row>
     </Container>
