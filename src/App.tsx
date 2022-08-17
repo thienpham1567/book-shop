@@ -1,13 +1,22 @@
 import { useState, useEffect } from 'react'
 import './App.scss'
 import NavBar from './components/Navbar/NavBar';
-import Hero from './components/Hero/Hero'
+import Footer from './components/Footer/Footer';
+import { Outlet } from 'react-router-dom';
 
 function App() {
 
   return (
     <div className="App">
-      <NavBar />
+      <header>
+        <NavBar />
+      </header>
+      <main>
+        <Outlet />
+      </main>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   )
 }

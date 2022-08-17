@@ -1,0 +1,48 @@
+.footer {
+  background-color: rgb(71, 4, 80);
+
+  .p-custom {
+    padding: 3rem 10rem;
+  }
+
+  .media-payment {
+    img {
+      width: 12.9rem;
+    }
+  }
+
+  .reviews {
+    margin-top: .3rem;
+
+    span {
+      font-weight: 600;
+    }
+  }
+}
+
+@media screen and (max-width:1200px) {
+  .footer {
+
+    .p-custom {
+      padding: 3rem 4rem;
+    }
+  }
+}
+
+@media screen and (max-width:992px) {
+  .footer {
+
+    .p-custom {
+      padding: 3rem 1rem;
+    }
+  }
+}
+
+@media screen and (max-width:767px) {
+  .footer {
+
+    .row {
+      gap: 2rem;
+    }
+  }
+}
