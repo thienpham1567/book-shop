@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 
 const NavBar = () => {
   return (
-    <Navbar expand="lg" className="px-2 shadow-sm">
+    <Navbar bg='light' expand="lg" className="px-2 shadow-sm fixed-top">
       <Container fluid>
         <Row className="block py-3 justify-content-end align-items-center">
           <Col xs={5} lg={4}>
