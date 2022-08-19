@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import { Link, Outlet, useOutlet } from 'react-router-dom'
+import { Container } from 'react-bootstrap';
 
 const Fiction = () => {
+  const outlet = useOutlet();
   return (
-    <div>Fiction</div>
+    <Fragment>
+      {
+        !outlet ? <Container>
+
+        </Container>
+          : <Outlet />
+      }
+    </Fragment>
   )
 }
 

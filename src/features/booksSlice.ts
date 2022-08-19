@@ -7,8 +7,6 @@ export const fetchBooks = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const { data } = await commerce.products.list();
-      console.log(data);
-
       return data;
     } catch (error) {
       throw thunkAPI.rejectWithValue(

@@ -11,7 +11,7 @@ import ComicIcon from '../../assets/image/comic.png';
 import MangaIcon from '../../assets/image/manga.png';
 import HistoryIcon from '../../assets/image/history.png';
 import Slider from 'react-slick';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import { fetchBooks } from '../../features/booksSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../app/store';
@@ -51,8 +51,8 @@ const Home = () => {
 
   const getBooksByCategory = ({ categories }: { categories: string[] }): Book[] => {
     const books: Book[] = [];
-    value.forEach((book) => {
-      const results: boolean[] = book.categories.map((cate) =>
+    value.forEach((book: Book) => {
+      const results: boolean[] = book.categories.map((cate: { id: string, name: string, slug: string }) =>
         categories.includes(cate.slug),
       );
       results[0] && results[1] && books.push(book);
@@ -73,114 +73,125 @@ const Home = () => {
           </Carousel.Item>))
         }
       </Carousel>
-      <Container className='py-5'>
+      <Container className='p-5'>
 
         {/* Romance */}
         <Row className="align-items-center">
-          <Col className='d-flex align-items-center gap-3 mb-2'>
+          <Col xs={12} lg={9} className='d-flex align-items-center gap-3 mb-2'>
             <img src={RomanceIcon} alt="romance icon" />
             <h1 className='header-text'>Romance</h1>
           </Col>
-          <Col className="text-end">
-            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill">View List ({romance.length} books)</Button>
+          <Col xs={12} lg={3} className="text-end">
+            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill w-100">View List ({romance.length} books)</Button>
           </Col>
-          <Slider {...settings} className='shadow p-2'>
-            {romance.map((book) => (<Col xs={3} key={book.id}>
-              <Link to="/">
-                <img src={book.image?.url} alt="book img" className="img-custom" />
-              </Link>
-            </Col>))}
-          </Slider>
+          {
+            loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>
+              {romance.map((book) => (<Col xs={3} key={book.id}>
+                <Link to="/">
+                  <img src={book.image?.url} alt="book img" className="img-custom" />
+                </Link>
+              </Col>))}
+            </Slider>
+          }
         </Row>
-
         {/* Fantasy */}
         <Row className="align-items-center mt-5">
-          <Col className='d-flex align-items-center gap-3 mb-2'>
+          <Col xs={12} lg={9} className='d-flex align-items-center gap-3 mb-2'>
             <img src={FantasyIcon} alt="romance icon" />
             <h1 className='header-text'>Fantasy</h1>
           </Col>
-          <Col className="text-end">
-            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill">View List ({romance.length} books)</Button>
+          <Col xs={12} lg={3} className="text-end">
+            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill w-100">View List ({romance.length} books)</Button>
           </Col>
-          <Slider {...settings} className='shadow p-2'>
-            {fantasy.map((book) => (<Col xs={3} key={book.id}>
-              <Link to="/" >
-                <img src={book.image?.url} alt="book img" className="img-custom" />
-              </Link>
-            </Col>))}
-          </Slider>
+          {
+            loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>
+              {fantasy.map((book) => (<Col xs={3} key={book.id}>
+                <Link to="/">
+                  <img src={book.image?.url} alt="book img" className="img-custom" />
+                </Link>
+              </Col>))}
+            </Slider>
+          }
         </Row>
 
         {/* History */}
         <Row className="align-items-center mt-5">
-          <Col className='d-flex align-items-center gap-3 mb-2'>
+          <Col xs={12} lg={9} className='d-flex align-items-center gap-3 mb-2'>
             <img src={HistoryIcon} alt="romance icon" />
             <h1 className='header-text'>History</h1>
           </Col>
-          <Col className="text-end">
-            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill">View List ({romance.length} books)</Button>
+          <Col xs={12} lg={3} className="text-end">
+            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill w-100">View List ({romance.length} books)</Button>
           </Col>
-          <Slider {...settings} className='shadow p-2'>
-            {history.map((book) => (<Col xs={3} key={book.id}>
-              <Link to="/" >
-                <img src={book.image?.url} alt="book img" className="img-custom" />
-              </Link>
-            </Col>))}
-          </Slider>
+          {
+            loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>
+              {history.map((book) => (<Col xs={3} key={book.id}>
+                <Link to="/">
+                  <img src={book.image?.url} alt="book img" className="img-custom" />
+                </Link>
+              </Col>))}
+            </Slider>
+          }
         </Row>
 
         {/* Horror */}
         <Row className="align-items-center mt-5">
-          <Col className='d-flex align-items-center gap-3 mb-2'>
+          <Col xs={12} lg={9} className='d-flex align-items-center gap-3 mb-2'>
             <img src={HorrorIcon} alt="romance icon" />
             <h1 className='header-text'>Horror</h1>
           </Col>
-          <Col className="text-end">
-            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill">View List ({romance.length} books)</Button>
+          <Col xs={12} lg={3} className="text-end">
+            <Button variant='danger' className="w-100 text-uppercase fw-semibold rounded-pill">View List ({romance.length} books)</Button>
           </Col>
-          <Slider {...settings} className='shadow p-2'>
-            {horror.map((book) => (<Col xs={3} key={book.id}>
-              <Link to="/" >
-                <img src={book.image?.url} alt="book img" className="img-custom" />
-              </Link>
-            </Col>))}
-          </Slider>
+          {
+            loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>
+              {horror.map((book) => (<Col xs={3} key={book.id}>
+                <Link to="/">
+                  <img src={book.image?.url} alt="book img" className="img-custom" />
+                </Link>
+              </Col>))}
+            </Slider>
+          }
         </Row>
 
         {/* Manga */}
         <Row className="align-items-center mt-5">
-          <Col className='d-flex align-items-center gap-3 mb-2'>
+          <Col xs={12} lg={9} className='d-flex align-items-center gap-3 mb-2'>
             <img src={MangaIcon} alt="romance icon" />
             <h1 className='header-text'>Manga</h1>
           </Col>
-          <Col className="text-end">
-            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill">View List ({romance.length} books)</Button>
+          <Col xs={12} lg={3} className="text-end">
+            <Button variant='danger' className="w-100 text-uppercase fw-semibold rounded-pill">View List ({romance.length} books)</Button>
           </Col>
-          <Slider {...settings} className='shadow p-2'>
-            {manga.map((book) => (<Col xs={3} key={book.id}>
-              <Link to="/" >
-                <img src={book.image?.url} alt="book img" className="img-custom" />
-              </Link>
-            </Col>))}
-          </Slider>
+          {
+            loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>
+              {manga.map((book) => (<Col xs={3} key={book.id}>
+                <Link to="/">
+                  <img src={book.image?.url} alt="book img" className="img-custom" />
+                </Link>
+              </Col>))}
+            </Slider>
+          }
         </Row>
 
         {/* Comic & Graphic novels */}
         <Row className="align-items-center mt-5">
-          <Col className='d-flex align-items-center gap-3 mb-2'>
+          <Col xs={12} lg={9} className='d-flex align-items-center gap-3 mb-2'>
             <img src={ComicIcon} alt="romance icon" />
             <h1 className='header-text'>Comic & Graphic Novels</h1>
           </Col>
-          <Col className="text-end">
-            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill">View List ({romance.length} books)</Button>
+          <Col xs={12} lg={3} className="text-end">
+            <Button variant='danger' className="w-100 text-uppercase fw-semibold rounded-pill">View List ({romance.length} books)</Button>
           </Col>
-          <Slider {...settings} className='shadow p-2'>
-            {comicAndGraphicNovel.map((book) => (<Col xs={3} key={book.id}>
-              <Link to="/" >
-                <img src={book.image?.url} alt="book img" className="img-custom" />
-              </Link>
-            </Col>))}
-          </Slider>
+          {
+            loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>
+              {comicAndGraphicNovel.map((book) => (<Col xs={3} key={book.id}>
+                <Link to="/">
+                  <img src={book.image?.url} alt="book img" className="img-custom" />
+                </Link>
+              </Col>))}
+            </Slider>
+          }
         </Row>
       </Container>
     </Fragment>

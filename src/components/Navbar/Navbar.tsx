@@ -85,38 +85,10 @@ const NavBar = () => {
                   <Link to="/" className="nav-link nav-link-hover">
                     New Books
                   </Link>
-                  {/* <NavDropdown
-                    title="Fiction"
-                    id={`offcanvasNavbarDropdown-expand-lg`}
-                  >
-                    <div className="d-flex align-items-center justify-content-center shadow-sm">
-                      <div className="links">
-                        <Link to="/" className="nav-link">
-                          Romance
-                        </Link>
-                        <Link to="/" className="nav-link">
-                          Comics & Graphic Novels
-                        </Link>
-                        <Link to="/" className="nav-link">
-                          Horror
-                        </Link>
-                      </div>
-                      <div className="links">
-                        <Link to="/" className="nav-link">
-                          Fantasy
-                        </Link>
-                        <Link to="/" className="nav-link">
-                          Manga
-                        </Link>
-                        <Link to="/" className="nav-link">
-                          Historical Fiction
-                        </Link>
-                      </div>
-                    </div>
-                  </NavDropdown> */}
+
                   {/* Fiction */}
                   <div className="nav-item show dropdown">
-                    <Link to='/fiction' id="offcanvasNavbarDropdown-expand-lg"
+                    <Link to='categories/fiction' id="offcanvasNavbarDropdown-expand-lg"
                       aria-expanded="true"
                       role="button"
                       className="dropdown-toggle nav-link nav-link-hover "
@@ -130,7 +102,7 @@ const NavBar = () => {
                     >
                       <div className="d-sm-flex align-items-center justify-content-center">
                         <div className="links">
-                          <Link to="/" className="nav-link">
+                          <Link to="categories/fiction/romance" className="nav-link">
                             Romance
                           </Link>
                           <Link to="/" className="nav-link">
