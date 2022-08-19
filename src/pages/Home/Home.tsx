@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import './Home.scss'
-import Carousel from 'react-bootstrap/Carousel';
 import Banner1 from '../../assets/image/banner1.jpg';
 import Banner2 from '../../assets/image/banner2.jpg';
 import Banner3 from '../../assets/image/banner3.jpg';
@@ -11,12 +10,13 @@ import ComicIcon from '../../assets/image/comic.png';
 import MangaIcon from '../../assets/image/manga.png';
 import HistoryIcon from '../../assets/image/history.png';
 import Slider from 'react-slick';
-import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Button, Spinner, Carousel } from 'react-bootstrap';
 import { fetchBooks } from '../../features/booksSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../app/store';
 import { Product as Book } from '@chec/commerce.js/types/product.js';
 import { Link } from 'react-router-dom'
+import { getBooksByCategory } from '../../utils/index';
 
 const banners = [Banner1, Banner2, Banner3];
 const Home = () => {
@@ -41,24 +41,13 @@ const Home = () => {
   }, [])
 
   useEffect(() => {
-    setFantasy(getBooksByCategory({ categories: ['fiction', 'fantasy'] }));
-    setRomance(getBooksByCategory({ categories: ['fiction', 'romance'] }));
-    setComicAndGraphicNovel(getBooksByCategory({ categories: ['fiction', 'comics-graphic-novels'] }));
-    setHorror(getBooksByCategory({ categories: ['fiction', 'horror'] }));
-    setManga(getBooksByCategory({ categories: ['fiction', 'manga'] }));
-    setHistory(getBooksByCategory({ categories: ['fiction', 'historical'] }));
+    setFantasy(getBooksByCategory(value, { categories: ['fiction', 'fantasy'] }));
+    setRomance(getBooksByCategory(value, { categories: ['fiction', 'romance'] }));
+    setComicAndGraphicNovel(getBooksByCategory(value, { categories: ['fiction', 'comics-graphic-novels'] }));
+    setHorror(getBooksByCategory(value, { categories: ['fiction', 'horror'] }));
+    setManga(getBooksByCategory(value, { categories: ['fiction', 'manga'] }));
+    setHistory(getBooksByCategory(value, { categories: ['fiction', 'historical'] }));
   }, [value])
-
-  const getBooksByCategory = ({ categories }: { categories: string[] }): Book[] => {
-    const books: Book[] = [];
-    value.forEach((book: Book) => {
-      const results: boolean[] = book.categories.map((cate: { id: string, name: string, slug: string }) =>
-        categories.includes(cate.slug),
-      );
-      results[0] && results[1] && books.push(book);
-    });
-    return books;
-  }
 
   return (
     <Fragment>
