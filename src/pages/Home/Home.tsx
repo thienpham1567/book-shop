@@ -62,7 +62,7 @@ const Home = () => {
           </Carousel.Item>))
         }
       </Carousel>
-      <Container className='p-5'>
+      <Container className='pt-5'>
 
         {/* Romance */}
         <Row className="align-items-center">

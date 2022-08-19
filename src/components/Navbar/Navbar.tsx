@@ -105,21 +105,21 @@ const NavBar = () => {
                           <Link to="categories/fiction/romance" className="nav-link">
                             Romance
                           </Link>
-                          <Link to="/" className="nav-link">
+                          <Link to="categories/fiction/comics-graphic-novels" className="nav-link">
                             Comics & Graphic Novels
                           </Link>
-                          <Link to="/" className="nav-link">
+                          <Link to="categories/fiction/horror" className="nav-link">
                             Horror
                           </Link>
                         </div>
                         <div className="links">
-                          <Link to="/" className="nav-link">
+                          <Link to="categories/fiction/fantasy" className="nav-link">
                             Fantasy
                           </Link>
-                          <Link to="/" className="nav-link">
+                          <Link to="categories/fiction/manga" className="nav-link">
                             Manga
                           </Link>
-                          <Link to="/" className="nav-link">
+                          <Link to="categories/fiction/historical-fiction" className="nav-link">
                             Historical Fiction
                           </Link>
                         </div>

@@ -11,7 +11,7 @@ function App() {
       <header>
         <NavBar />
       </header>
-      <main className='mt-main bg-light'>
+      <main className='mt-main mb-5'>
         <Outlet />
       </main>
       <footer>
