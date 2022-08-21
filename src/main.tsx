@@ -24,8 +24,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Routes>
           <Route path='/' element={<App />}>
             <Route path='' element={<Home />} />
-            <Route path='books/:id' element={<Book />} />
-            <Route path='categories/fiction/' element={<Fiction />} >
+            <Route path='categories/fiction/' element={<Fiction />}>
+              <Route path=':title/:id' element={<Book />} />
               <Route path='fantasy' element={<Fantasy />} />
               <Route path='manga' element={<Manga />} />
               <Route path='romance' element={<Romance />} />

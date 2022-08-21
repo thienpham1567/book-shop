@@ -15,29 +15,14 @@ export const fetchBooks = createAsyncThunk(
     }
   },
 );
-
-export const fetchBooksByCategory = createAsyncThunk(
-  'books/fetchBooksStatus',
-  async (categories: { categories: string[] }, thunkAPI) => {
-    try {
-      const { data } = await commerce.products.list(categories);
-      return data;
-    } catch (error) {
-      throw thunkAPI.rejectWithValue(
-        'Got error when fetched book from commerce',
-      );
-    }
-  },
-);
-
 interface BooksState {
-  value: Book[];
+  books: Book[];
   loading: boolean;
   error: string;
 }
 
 const initialState: BooksState = {
-  value: [],
+  books: [],
   loading: false,
   error: '',
 };
@@ -53,7 +38,7 @@ export const booksSlice = createSlice({
     });
     builder.addCase(fetchBooks.fulfilled, (state, action) => {
       state.loading = false;
-      state.value = action.payload;
+      state.books = action.payload;
     });
     builder.addCase(fetchBooks.rejected, (state, action) => {
       state.loading = false;

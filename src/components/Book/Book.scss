@@ -1,0 +1,126 @@
+.container-lg {
+
+  padding: 2rem 8rem;
+
+  .row {
+
+    .header-title-mobile {
+      display: none;
+    }
+
+    .header-title-desktop {
+      display: block;
+    }
+
+    .header-title {
+      h1 {
+        color: rgba(0, 0, 0, 0.8)
+      }
+
+      .authors {
+        margin-top: .4rem;
+        max-width: 80%;
+        color: #573ba3;
+      }
+    }
+
+    .format {
+      margin-top: .9rem;
+
+      .box {
+        cursor: pointer;
+        border: 2px solid rgb(215, 215, 215);
+        border-radius: 5px;
+
+        &:hover {
+          border: 2px solid #573ba3;
+
+          :first-child {
+            color: #41268b;
+          }
+        }
+      }
+    }
+
+    .stock {
+      display: flex;
+      align-items: center;
+      gap: .2rem;
+      margin: 1rem 0;
+      color: rgb(28, 168, 121);
+    }
+
+    .buttons {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      gap: .5rem;
+
+      button {
+        transition: all .3s ease-in-out;
+
+        &:hover {
+          transform: scale(1.025);
+        }
+      }
+    }
+
+    .description {
+      p {
+        font-size: 1.1rem;
+      }
+    }
+
+    .product-details {
+      .details {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+
+        .title {
+          width: 20%;
+          text-align: end;
+        }
+
+        .info {
+          width: 80%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width:1200px) {
+  .container-lg {
+    padding: 2rem 3rem;
+  }
+}
+
+@media screen and (max-width:992px) {
+  .container-lg {
+    padding: 2rem 0;
+
+    .row {
+      .header-title-desktop {
+        display: none;
+      }
+
+      .header-title-mobile {
+        display: block;
+      }
+
+      .book-img {
+        margin-top: 1rem;
+        padding: 0 10rem;
+      }
+
+      .buttons {
+        button {
+          width: 100%;
+        }
+      }
+
+    }
+  }
+}

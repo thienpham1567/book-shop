@@ -27,7 +27,7 @@ const Home = () => {
     slidesToShow: 1,
     slidesToScroll: 1
   };
-  const { value, loading, error } = useSelector((state: RootState) => state.booksReducer);
+  const { books, loading, error } = useSelector((state: RootState) => state.booksReducer);
   const dispatch = useDispatch();
   const [fantasy, setFantasy] = useState<Book[]>([]);
   const [romance, setRomance] = useState<Book[]>([]);
@@ -41,13 +41,13 @@ const Home = () => {
   }, [])
 
   useEffect(() => {
-    setFantasy(getBooksByCategory(value, { categories: ['fiction', 'fantasy'] }));
-    setRomance(getBooksByCategory(value, { categories: ['fiction', 'romance'] }));
-    setComicAndGraphicNovel(getBooksByCategory(value, { categories: ['fiction', 'comics-graphic-novels'] }));
-    setHorror(getBooksByCategory(value, { categories: ['fiction', 'horror'] }));
-    setManga(getBooksByCategory(value, { categories: ['fiction', 'manga'] }));
-    setHistory(getBooksByCategory(value, { categories: ['fiction', 'historical'] }));
-  }, [value])
+    setFantasy(getBooksByCategory(books, { categories: ['fiction', 'fantasy'] }));
+    setRomance(getBooksByCategory(books, { categories: ['fiction', 'romance'] }));
+    setComicAndGraphicNovel(getBooksByCategory(books, { categories: ['fiction', 'comics-graphic-novels'] }));
+    setHorror(getBooksByCategory(books, { categories: ['fiction', 'horror'] }));
+    setManga(getBooksByCategory(books, { categories: ['fiction', 'manga'] }));
+    setHistory(getBooksByCategory(books, { categories: ['fiction', 'historical'] }));
+  }, [books])
 
   return (
     <Fragment>

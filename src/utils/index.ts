@@ -1,4 +1,5 @@
 import { Product as Book } from '@chec/commerce.js/types/product.js';
+import { commerce } from '../lib/commerce';
 
 export const getBooksByCategory = (
   books: Book[],
@@ -21,4 +22,13 @@ export const getBooksByCategory = (
     }
   });
   return data;
+};
+
+export const retrieveBookById = async (bookId: string): Promise<Book> => {
+  try {
+    const data = commerce.products.retrieve(bookId);
+    return data;
+  } catch (error) {
+    throw error;
+  }
 };
