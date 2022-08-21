@@ -108,11 +108,12 @@
 
       .header-title-mobile {
         display: block;
+        padding: 0 1rem;
       }
 
       .book-img {
         margin-top: 1rem;
-        padding: 0 10rem;
+        padding: 0 5rem;
       }
 
       .buttons {
@@ -121,6 +122,32 @@
         }
       }
 
+    }
+  }
+}
+
+@media screen and (max-width:992px) {
+  .container-lg {
+    padding: 2rem 0;
+
+    .row {
+      .product-details {
+        .details {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          gap: .5rem;
+
+          .title {
+            width: 34%;
+            text-align: end;
+          }
+
+          .info {
+            width: 70%;
+          }
+        }
+      }
     }
   }
 }

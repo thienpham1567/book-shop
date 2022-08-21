@@ -59,7 +59,7 @@ const Book = (): JSX.Element => {
               <p className='text-light fw-semibold text-uppercase'>Add to cart</p>
             </Button>
             <Button variant="outline-secondary" className="d-flex align-items-center justify-content-center gap-2 rounded-pill">
-              <i className="fa-solid fa-book-heart"></i>
+              <i class="fa-solid fa-book-bookmark"></i>
               <p className='fw-semibold text-uppercase'>Add to wishlist</p>
             </Button>
           </div>
