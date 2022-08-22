@@ -24,67 +24,80 @@
       }
     }
 
-    .format {
-      margin-top: .9rem;
+    .content-book {
+      .format {
+        margin-top: .9rem;
 
-      .box {
-        cursor: pointer;
-        border: 2px solid rgb(215, 215, 215);
-        border-radius: 5px;
+        .content-format-desktop {
+          display: block;
 
-        &:hover {
-          border: 2px solid #573ba3;
+          .box {
+            min-width: 12rem;
+            cursor: pointer;
+            border: 2px solid rgb(215, 215, 215);
+            border-radius: 5px;
 
-          :first-child {
-            color: #41268b;
+            &:hover {
+              border: 2px solid #573ba3;
+
+              :first-child {
+                color: #41268b;
+              }
+            }
+          }
+        }
+
+        .content-format-mobile {
+          display: none;
+        }
+      }
+
+      .stock {
+        display: flex;
+        align-items: center;
+        gap: .2rem;
+        margin: 1rem 0;
+        color: rgb(28, 168, 121);
+      }
+
+      .buttons {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        display: flex;
+        gap: .5rem;
+
+        button {
+          transition: all .3s ease-in-out;
+
+          &:hover {
+            transform: scale(1.025);
           }
         }
       }
-    }
 
-    .stock {
-      display: flex;
-      align-items: center;
-      gap: .2rem;
-      margin: 1rem 0;
-      color: rgb(28, 168, 121);
-    }
-
-    .buttons {
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      display: flex;
-      gap: .5rem;
-
-      button {
-        transition: all .3s ease-in-out;
-
-        &:hover {
-          transform: scale(1.025);
+      .description {
+        p {
+          font-size: 1.1rem;
         }
       }
-    }
 
-    .description {
-      p {
-        font-size: 1.1rem;
-      }
-    }
+      .product-details {
+        .details {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          gap: .5rem;
+          font-size: .9rem;
+          margin-left: -4rem;
 
-    .product-details {
-      .details {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        gap: .5rem;
+          .title {
+            width: 10rem;
+            text-align: end;
+          }
 
-        .title {
-          width: 20%;
-          text-align: end;
-        }
-
-        .info {
-          width: 80%;
+          .info {
+            width: 20rem;
+          }
         }
       }
     }
@@ -94,6 +107,23 @@
 @media screen and (max-width:1200px) {
   .container-lg {
     padding: 2rem 3rem;
+
+    .row {
+      .product-details {
+        .details {
+          margin-left: -4.2rem;
+
+          .title {
+            width: 10rem;
+            text-align: end;
+          }
+
+          .info {
+            width: 20rem;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -108,7 +138,110 @@
 
       .header-title-mobile {
         display: block;
-        padding: 0 1rem;
+        padding: 0 3rem;
+      }
+
+      .book-img {
+        margin-top: 1rem;
+        padding: 0 10rem;
+      }
+
+      .content-book {
+        padding: 0 2rem;
+
+        .format {
+          margin-top: .9rem;
+
+          .content-format-desktop {
+            .box {
+              display: none;
+            }
+          }
+
+          .content-format-mobile {
+            display: block;
+
+            .format-dropdown {
+              position: sticky;
+              z-index: 100;
+
+              .dropdown-menu {
+                padding: 0;
+
+                .dropdown-item {
+                  padding: 1rem;
+                  font-size: 1.1rem;
+
+                  &:hover {
+                    background-color: rgb(15, 104, 221);
+                  }
+                }
+
+              }
+
+              button {
+                border: 2px solid #573ba3;
+                border-radius: 25px;
+              }
+            }
+          }
+        }
+
+        .buttons {
+          button {
+            width: 100%;
+          }
+        }
+
+        .product-details {
+          .details {
+            margin-left: -4.2rem;
+
+            .title {
+              width: 10rem;
+              text-align: end;
+            }
+
+            .info {
+              width: 20rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width:767px) {
+  .container-lg {
+    padding: 2rem 0;
+
+    .row {
+      .content-book {
+        .product-details {
+          .details {
+            margin-left: -4.2rem;
+
+            .title {
+              width: 10rem;
+              text-align: end;
+            }
+
+            .info {
+              width: 20rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width:576px) {
+  .container-lg {
+    .row {
+      .header-title-mobile {
+        padding: 0 2rem;
       }
 
       .book-img {
@@ -116,35 +249,52 @@
         padding: 0 5rem;
       }
 
-      .buttons {
-        button {
-          width: 100%;
+      .content-book {
+        padding: 0 .5rem;
+
+        .buttons {
+          button {
+            font-size: .8rem;
+            padding-top: .7rem;
+            padding-bottom: .7rem;
+          }
+        }
+
+        .product-details {
+          .details {
+            margin-left: -2.3rem;
+
+            .title {
+              width: 8rem;
+              text-align: end;
+            }
+
+            .info {
+              width: 15rem;
+            }
+          }
         }
       }
-
     }
   }
 }
 
-@media screen and (max-width:992px) {
+@media screen and (max-width:450px) {
   .container-lg {
-    padding: 2rem 0;
-
     .row {
-      .product-details {
-        .details {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          gap: .5rem;
+      .content-book {
+        .product-details {
+          .details {
+            margin-left: -2.3rem;
 
-          .title {
-            width: 34%;
-            text-align: end;
-          }
+            .title {
+              width: 10rem;
+              text-align: end;
+            }
 
-          .info {
-            width: 70%;
+            .info {
+              width: 15rem;
+            }
           }
         }
       }
