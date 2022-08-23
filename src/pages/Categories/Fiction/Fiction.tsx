@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react'
-import { Link, Outlet, useOutlet } from 'react-router-dom'
+import { Link, Outlet, useOutlet, useParams } from 'react-router-dom'
 import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app/store';
@@ -8,7 +8,6 @@ import { Product as Book } from '@chec/commerce.js/types/product';
 import { getBooksByCategory } from '../../../utils';
 import '../Category.scss';
 import PaginationBar from '../../../components/Pagination/PaginationBar';
-import { commerce } from '../../../lib/commerce';
 
 interface AuthorsState {
   bookId: string;
@@ -16,6 +15,7 @@ interface AuthorsState {
 }
 
 const Fiction = () => {
+  const { category } = useParams();
   const outlet = useOutlet();
   const dispatch = useDispatch();
   const { books, loading, error } = useSelector((state: RootState) => state.booksReducer);
@@ -34,8 +34,8 @@ const Fiction = () => {
   }, [])
 
   useEffect(() => {
-    setFiction(getBooksByCategory(books, { categories: ['fiction'] }));
-  }, [books])
+    setFiction(getBooksByCategory(books, { categories: ['fiction', category ? category : ''] }));
+  }, [books, category])
 
   const paginate = (numberPage: number): void => {
     setCurrentPage(numberPage);

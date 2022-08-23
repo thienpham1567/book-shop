@@ -15,7 +15,7 @@ export const getBooksByCategory = (
       (cate: { id: string; name: string; slug: string }) =>
         categories.includes(cate.slug),
     );
-    if (categories.length <= 1) {
+    if (categories[1] === '') {
       (results[0] || results[1]) && data.push(book);
     } else {
       results[0] && results[1] && data.push(book);

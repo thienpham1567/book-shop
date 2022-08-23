@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import './Book.scss';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { Container, Row, Col, Button, Dropdown } from 'react-bootstrap';
 import { Product as BookState } from '@chec/commerce.js/types/product';
 import { retrieveBookById } from '../../utils/index';
@@ -8,15 +8,15 @@ import { retrieveBookById } from '../../utils/index';
 const Book = (): JSX.Element => {
   const [book, setBook] = useState<BookState>();
   const { id } = useParams();
+  const location = useLocation();
   useEffect(() => {
     retrieveBookById(id!).then((book) => {
       setBook(book);
-      console.log(book);
     })
   }, [id] as string[])
 
   return (
-    <Container fluid="lg">
+    <Container fluid="lg" className='py-5'>
       {book && <Row className='justify-content-center'>
         <Col xs={12} className="header-title header-title-mobile">
           <h1 className='fw-semibold'>{book.name}</h1>
@@ -78,7 +78,7 @@ const Book = (): JSX.Element => {
                 <p className='text-light fw-semibold text-uppercase'>Add to cart</p>
               </Button>
               <Button variant="outline-secondary" className="d-flex align-items-center justify-content-center gap-2 rounded-pill">
-                <i class="fa-solid fa-book-bookmark"></i>
+                <i className="fa-solid fa-book-bookmark"></i>
                 <p className='fw-semibold text-uppercase'>Add to wishlist</p>
               </Button>
             </div>

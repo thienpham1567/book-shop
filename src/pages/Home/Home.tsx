@@ -15,7 +15,7 @@ import { fetchBooks } from '../../features/booksSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../app/store';
 import { Product as Book } from '@chec/commerce.js/types/product.js';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { getBooksByCategory } from '../../utils/index';
 
 const banners = [Banner1, Banner2, Banner3];
@@ -27,6 +27,7 @@ const Home = () => {
     slidesToShow: 1,
     slidesToScroll: 1
   };
+  const navigate = useNavigate();
   const { books, loading, error } = useSelector((state: RootState) => state.booksReducer);
   const dispatch = useDispatch();
   const [fantasy, setFantasy] = useState<Book[]>([]);
@@ -46,7 +47,7 @@ const Home = () => {
     setComicAndGraphicNovel(getBooksByCategory(books, { categories: ['fiction', 'comics-graphic-novels'] }));
     setHorror(getBooksByCategory(books, { categories: ['fiction', 'horror'] }));
     setManga(getBooksByCategory(books, { categories: ['fiction', 'manga'] }));
-    setHistory(getBooksByCategory(books, { categories: ['fiction', 'historical'] }));
+    setHistory(getBooksByCategory(books, { categories: ['fiction', 'historical-fiction'] }));
   }, [books])
 
   return (
@@ -71,12 +72,12 @@ const Home = () => {
             <h1 className='header-text'>Romance</h1>
           </Col>
           <Col xs={12} lg={3} className="text-end">
-            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill w-100">View List ({romance.length} books)</Button>
+            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill w-100" onClick={() => navigate('categories/fiction/romance')}>View List ({romance.length} books)</Button>
           </Col>
           {
             loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>
               {romance.map((book) => (<Col xs={3} key={book.id}>
-                <Link to="/">
+                <Link to={`categories/fiction/romance/${book.name}/${book.id}`}>
                   <img src={book.image?.url} alt="book img" className="img-custom" />
                 </Link>
               </Col>))}
@@ -90,12 +91,12 @@ const Home = () => {
             <h1 className='header-text'>Fantasy</h1>
           </Col>
           <Col xs={12} lg={3} className="text-end">
-            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill w-100">View List ({romance.length} books)</Button>
+            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill w-100" onClick={() => navigate('categories/fiction/fantasy')}>View List ({fantasy.length} books)</Button>
           </Col>
           {
             loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>
               {fantasy.map((book) => (<Col xs={3} key={book.id}>
-                <Link to="/">
+                <Link to={`categories/fiction/fantasy/${book.name}/${book.id}`}>
                   <img src={book.image?.url} alt="book img" className="img-custom" />
                 </Link>
               </Col>))}
@@ -110,12 +111,12 @@ const Home = () => {
             <h1 className='header-text'>History</h1>
           </Col>
           <Col xs={12} lg={3} className="text-end">
-            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill w-100">View List ({romance.length} books)</Button>
+            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill w-100" onClick={() => navigate('categories/fiction/historical-fiction')}>View List ({history.length} books)</Button>
           </Col>
           {
             loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>
               {history.map((book) => (<Col xs={3} key={book.id}>
-                <Link to="/">
+                <Link to={`categories/fiction/historical-fiction/${book.name}/${book.id}`}>
                   <img src={book.image?.url} alt="book img" className="img-custom" />
                 </Link>
               </Col>))}
@@ -130,12 +131,12 @@ const Home = () => {
             <h1 className='header-text'>Horror</h1>
           </Col>
           <Col xs={12} lg={3} className="text-end">
-            <Button variant='danger' className="w-100 text-uppercase fw-semibold rounded-pill">View List ({romance.length} books)</Button>
+            <Button variant='danger' className="w-100 text-uppercase fw-semibold rounded-pill" onClick={() => navigate('categories/fiction/horror')}>View List ({horror.length} books)</Button>
           </Col>
           {
             loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>
               {horror.map((book) => (<Col xs={3} key={book.id}>
-                <Link to="/">
+                <Link to={`categories/fiction/horror/${book.name}/${book.id}`}>
                   <img src={book.image?.url} alt="book img" className="img-custom" />
                 </Link>
               </Col>))}
@@ -150,12 +151,12 @@ const Home = () => {
             <h1 className='header-text'>Manga</h1>
           </Col>
           <Col xs={12} lg={3} className="text-end">
-            <Button variant='danger' className="w-100 text-uppercase fw-semibold rounded-pill">View List ({romance.length} books)</Button>
+            <Button variant='danger' className="w-100 text-uppercase fw-semibold rounded-pill" onClick={() => navigate('categories/fiction/manga')}>View List ({manga.length} books)</Button>
           </Col>
           {
             loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>
               {manga.map((book) => (<Col xs={3} key={book.id}>
-                <Link to="/">
+                <Link to={`categories/fiction/manga/${book.name}/${book.id}`}>
                   <img src={book.image?.url} alt="book img" className="img-custom" />
                 </Link>
               </Col>))}
@@ -170,12 +171,12 @@ const Home = () => {
             <h1 className='header-text'>Comic & Graphic Novels</h1>
           </Col>
           <Col xs={12} lg={3} className="text-end">
-            <Button variant='danger' className="w-100 text-uppercase fw-semibold rounded-pill">View List ({romance.length} books)</Button>
+            <Button variant='danger' className="w-100 text-uppercase fw-semibold rounded-pill" onClick={() => navigate('categories/fiction/comics-graphic-novels')}>View List ({comicAndGraphicNovel.length} books)</Button>
           </Col>
           {
             loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>
               {comicAndGraphicNovel.map((book) => (<Col xs={3} key={book.id}>
-                <Link to="/">
+                <Link to={`categories/fiction/comics-graphic-novels/${book.name}/${book.id}`}>
                   <img src={book.image?.url} alt="book img" className="img-custom" />
                 </Link>
               </Col>))}
