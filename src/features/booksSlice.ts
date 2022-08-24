@@ -9,7 +9,7 @@ export const fetchBooks = createAsyncThunk(
       const { data } = await commerce.products.list();
       return data;
     } catch (error) {
-      throw thunkAPI.rejectWithValue(
+      return thunkAPI.rejectWithValue(
         'Got error when fetched book from commerce',
       );
     }
@@ -42,7 +42,7 @@ export const booksSlice = createSlice({
     });
     builder.addCase(fetchBooks.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message!;
+      state.error = action.payload as string;
     });
   },
 });

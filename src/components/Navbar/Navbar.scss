@@ -60,7 +60,7 @@
           i {
             cursor: pointer;
             font-size: 1.2rem;
-            color: rgb(154, 82, 179);
+            color: rgb(128, 128, 128);
           }
 
           .quantity {
@@ -69,13 +69,14 @@
             justify-content: center;
             font-size: .8rem;
             font-weight: 600;
-            width: 1.4rem;
-            height: 1.4rem;
-            background-color: rgb(240, 240, 240);
+            width: 1.3rem;
+            height: 1.3rem;
+            background-color: rgb(0, 165, 177);
+            color: #fff;
             position: absolute;
             border-radius: 50%;
-            top: -.7rem;
-            right: -.7rem;
+            top: -.5rem;
+            right: -.6rem;
           }
         }
       }

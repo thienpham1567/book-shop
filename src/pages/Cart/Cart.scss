@@ -1,0 +1,19 @@
+.container {
+  padding: 2rem 10rem;
+
+  .card {
+    .card-body {
+      .row {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        margin: 0 1rem;
+        padding: 1rem 0;
+
+        .item-img {
+          width: 8.5rem;
+          height: 12rem;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+}

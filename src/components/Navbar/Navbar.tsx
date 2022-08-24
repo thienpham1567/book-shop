@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import './Navbar.scss';
 import {
   Nav,
   Navbar,
-  NavDropdown,
   Container,
   Col,
   Row,
@@ -13,9 +12,14 @@ import {
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const NavBar = () => {
+interface NavbarProps {
+  totalBooks: number
+}
+
+const NavBar: FC<NavbarProps> = ({ totalBooks }): JSX.Element => {
+
   return (
-    <Navbar bg='light' expand="lg" className="px-2 shadow-sm fixed-top">
+    <Navbar bg="light" expand="lg" className="px-2 shadow-sm fixed-top">
       <Container fluid>
         <Row className="block py-3 justify-content-end align-items-center">
           <Col xs={5} lg={4}>
@@ -46,9 +50,7 @@ const NavBar = () => {
                 Choose a Bookstore
               </p>
               <Button variant="outline-secondary d-none d-lg-flex">
-                <span className='w-100'>
-                  Sign in
-                </span>
+                <span className="w-100">Sign in</span>
               </Button>
               <span className="fs-4 d-lg-none">
                 <i className="fa-solid fa-circle-user"></i>
@@ -57,7 +59,7 @@ const NavBar = () => {
                 <div className="cart">
                   <i className="fa-solid fa-cart-shopping"></i>
                   <div className="quantity">
-                    <span>1</span>
+                    <span>{totalBooks}</span>
                   </div>
                 </div>
               </Link>
@@ -74,7 +76,11 @@ const NavBar = () => {
               placement="end"
             >
               <Offcanvas.Header closeButton>
-                <img src="https://images-production.bookshop.org/spree/curators/avatars/10/thumb/Social_media_Icon_alternative.jpg?1573251482" alt="logo" className='logo' />
+                <img
+                  src="https://images-production.bookshop.org/spree/curators/avatars/10/thumb/Social_media_Icon_alternative.jpg?1573251482"
+                  alt="logo"
+                  className="logo"
+                />
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-center flex-grow-1 gap-5">
@@ -90,12 +96,14 @@ const NavBar = () => {
 
                   {/* Fiction */}
                   <div className="nav-item show dropdown">
-                    <Link to='categories/fiction' id="offcanvasNavbarDropdown-expand-lg"
+                    <Link
+                      to="categories/fiction"
+                      id="offcanvasNavbarDropdown-expand-lg"
                       aria-expanded="true"
                       role="button"
                       className="dropdown-toggle nav-link nav-link-hover "
-                    >Fiction
-
+                    >
+                      Fiction
                     </Link>
                     <div
                       aria-labelledby="offcanvasNavbarDropdown-expand-lg"
@@ -104,24 +112,42 @@ const NavBar = () => {
                     >
                       <div className="d-sm-flex align-items-center justify-content-center">
                         <div className="links">
-                          <Link to="categories/fiction/romance" className="nav-link">
+                          <Link
+                            to="categories/fiction/romance"
+                            className="nav-link"
+                          >
                             Romance
                           </Link>
-                          <Link to="categories/fiction/comics-graphic-novels" className="nav-link">
+                          <Link
+                            to="categories/fiction/comics-graphic-novels"
+                            className="nav-link"
+                          >
                             Comics & Graphic Novels
                           </Link>
-                          <Link to="categories/fiction/horror" className="nav-link">
+                          <Link
+                            to="categories/fiction/horror"
+                            className="nav-link"
+                          >
                             Horror
                           </Link>
                         </div>
                         <div className="links">
-                          <Link to="categories/fiction/fantasy" className="nav-link">
+                          <Link
+                            to="categories/fiction/fantasy"
+                            className="nav-link"
+                          >
                             Fantasy
                           </Link>
-                          <Link to="categories/fiction/manga" className="nav-link">
+                          <Link
+                            to="categories/fiction/manga"
+                            className="nav-link"
+                          >
                             Manga
                           </Link>
-                          <Link to="categories/fiction/historical-fiction" className="nav-link">
+                          <Link
+                            to="categories/fiction/historical-fiction"
+                            className="nav-link"
+                          >
                             Historical Fiction
                           </Link>
                         </div>
@@ -130,12 +156,14 @@ const NavBar = () => {
                   </div>
                   {/* Nonfiction */}
                   <div className="nav-item show dropdown">
-                    <Link to='/fiction' id="offcanvasNavbarDropdown-expand-lg"
+                    <Link
+                      to="/fiction"
+                      id="offcanvasNavbarDropdown-expand-lg"
                       aria-expanded="true"
                       role="button"
                       className="dropdown-toggle nav-link nav-link-hover "
-                    >Nonfiction
-
+                    >
+                      Nonfiction
                     </Link>
                     <div
                       aria-labelledby="offcanvasNavbarDropdown-expand-lg"

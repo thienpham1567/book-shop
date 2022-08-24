@@ -4,11 +4,11 @@ import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app/store';
 import { fetchBooks } from '../../../features/booksSlice';
+import { addBookToCart } from '../../../features/cartSlice';
 import { Product as Book } from '@chec/commerce.js/types/product';
 import { getBooksByCategory } from '../../../utils';
 import '../Category.scss';
 import PaginationBar from '../../../components/Pagination/PaginationBar';
-import { retrieveBookById } from '../../../utils/index';
 interface AuthorsState {
   bookId: string;
   authors: string[]
@@ -18,9 +18,8 @@ const Fiction = () => {
   const { category } = useParams();
   const outlet = useOutlet();
   const dispatch = useDispatch();
-  const { books, loading, error } = useSelector((state: RootState) => state.booksReducer);
+  const { books, loading, error } = useSelector((state: RootState) => state.books);
   const [fiction, setFiction] = useState<Book[]>([]);
-  const [authors, setAuthors] = useState<AuthorsState[]>([])
   const [currentPage, setCurrentPage] = useState(1);
   const [booksPerPage, setBookPerPage] = useState(8);
 
@@ -39,6 +38,10 @@ const Fiction = () => {
 
   const paginate = (numberPage: number): void => {
     setCurrentPage(numberPage);
+  }
+
+  const addBook = (bookId: string, quantity: number) => {
+    dispatch(addBookToCart({ id: bookId, quantity: quantity }));
   }
 
   return (
@@ -67,7 +70,7 @@ const Fiction = () => {
                       <p className='fw-normal mt-1'>{book.price.formatted_with_symbol}</p>
                     </div>
                   </div>
-                  <Button variant="danger" className="d-flex align-items-center justify-content-center gap-2 w-100 rounded-pill">
+                  <Button variant="danger" className="d-flex align-items-center justify-content-center gap-2 w-100 rounded-pill" onClick={() => dispatch(addBookToCart({ id: book.id, quantity: 1 }))}>
                     <i className="fa-solid fa-cart-shopping"></i>
                     <p className='text-light fw-semibold text-uppercase'>Add to cart</p>
                   </Button>

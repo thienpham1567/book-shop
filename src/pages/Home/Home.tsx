@@ -28,7 +28,7 @@ const Home = () => {
     slidesToScroll: 1
   };
   const navigate = useNavigate();
-  const { books, loading, error } = useSelector((state: RootState) => state.booksReducer);
+  const { books, loading, error } = useSelector((state: RootState) => state.books);
   const dispatch = useDispatch();
   const [fantasy, setFantasy] = useState<Book[]>([]);
   const [romance, setRomance] = useState<Book[]>([]);
