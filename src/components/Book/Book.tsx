@@ -1,17 +1,21 @@
 import React, { FC, useState, useEffect } from 'react';
 import './Book.scss';
-import { useParams, useLocation } from 'react-router-dom';
+import { Link, useParams, generatePath } from 'react-router-dom';
 import { Container, Row, Col, Button, Dropdown } from 'react-bootstrap';
 import { Product as BookState } from '@chec/commerce.js/types/product';
 import { retrieveBookById } from '../../utils/index';
 
 const Book = (): JSX.Element => {
   const [book, setBook] = useState<BookState>();
-  const { id } = useParams();
-  const location = useLocation();
+  const { id } = useParams<"id">();
+  const [variant, setVariant] = useState<string>('');
+  const [formatOption, setFormatOption] = useState<string>('');
+
   useEffect(() => {
-    retrieveBookById(id!).then((book) => {
-      setBook(book);
+    retrieveBookById(id!).then((bookData) => {
+      setBook(bookData);
+      setVariant(bookData.variant_groups[0].id);
+      setFormatOption(bookData.variant_groups[0].options[0].id);
     })
   }, [id] as string[])
 
@@ -38,12 +42,14 @@ const Book = (): JSX.Element => {
             <Row className='format'>
               <Col xs={12}><p className='text-uppercase fw-normal mb-1'>Format</p></Col>
               <div className="content-format-desktop d-flex gap-2">
-                {book.variant_groups[0].options.map((format) => (
-                  <div key={format.id} className='p-3 box'>
-                    <p className="lead">{format.name}</p>
-                    <p className="lead text-secondary">English</p>
-                    <p className="lead fw-semibold">{format.price.formatted_with_symbol}</p>
-                  </div>
+                {book.variant_groups[0].options.map((format, index) => (
+                  <Link key={format.id} to="" className='nav-link'>
+                    <div key={format.id} className={`p-3 box  ${formatOption === format.id ? 'box-format-active' : ''}`}>
+                      <p className="lead">{format.name}</p>
+                      <p className="lead text-secondary">English</p>
+                      <p className="lead fw-semibold">{format.price.formatted_with_symbol}</p>
+                    </div>
+                  </Link>
                 ))}
               </div>
               <div className="content-format-mobile">

@@ -53,12 +53,14 @@ const NavBar = () => {
               <span className="fs-4 d-lg-none">
                 <i className="fa-solid fa-circle-user"></i>
               </span>
-              <div className="cart">
-                <i className="fa-solid fa-cart-shopping"></i>
-                <div className="quantity">
-                  <span>1</span>
+              <Link to="/cart">
+                <div className="cart">
+                  <i className="fa-solid fa-cart-shopping"></i>
+                  <div className="quantity">
+                    <span>1</span>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
           </Col>
         </Row>

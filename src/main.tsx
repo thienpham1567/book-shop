@@ -9,14 +9,8 @@ import { Provider } from 'react-redux';
 import App from './App'
 import Home from './pages/Home/Home';
 import Fiction from './pages/Categories/Fiction/Fiction';
-import Horror from './pages/Categories/Fiction/Horror';
-import Historical from './pages/Categories/Fiction/Historical';
-import Manga from './pages/Categories/Fiction/Manga';
-import ComicAndGraphicNovels from './pages/Categories/Fiction/ComicAndGraphicNovels';
-import Fantasy from './pages/Categories/Fiction/Fantasy';
-import Romance from './pages/Categories/Fiction/Romance';
-import CategoryOfFiction from './pages/Categories/Fiction/CategoryOfFiction';
 import Book from './components/Book/Book';
+import Cart from './pages/Cart/Cart';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -25,17 +19,12 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Routes>
           <Route path='/' element={<App />}>
             <Route path='' element={<Home />} />
+            <Route path='cart' element={<Cart />} />
             <Route path='categories/fiction' element={<Fiction />}>
               <Route path=':title/:id' element={<Book />} />
               <Route path=':category/' element={<Fiction />}>
                 <Route path=':title/:id' element={<Book />} />
               </Route>
-              {/* <Route path='fantasy' element={<Fantasy />} />
-              <Route path='manga' element={<Manga />} />
-              <Route path='romance' element={<Romance />} />
-              <Route path='comics-graphic-novels' element={<ComicAndGraphicNovels />} />
-              <Route path='historical-fiction' element={<Historical />} />
-              <Route path='horror' element={<Horror />} /> */}
             </Route>
           </Route>
         </Routes>

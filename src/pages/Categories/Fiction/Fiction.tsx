@@ -8,7 +8,7 @@ import { Product as Book } from '@chec/commerce.js/types/product';
 import { getBooksByCategory } from '../../../utils';
 import '../Category.scss';
 import PaginationBar from '../../../components/Pagination/PaginationBar';
-
+import { retrieveBookById } from '../../../utils/index';
 interface AuthorsState {
   bookId: string;
   authors: string[]
@@ -53,14 +53,14 @@ const Fiction = () => {
                 <Col className='header shadow-sm'><p className="header-text">Fiction Books</p></Col>
               </Row>
               <Row className='mt-5 gy-5'>
-                {currentBooks.map((book) => (<Col key={book.id} xs={12} lg={3}>
-                  <Link to={`${book.name}/${book.id}`}>
+                {currentBooks.map((book) => (<Col className='book-in-mobile' key={book.id} xs={12} lg={3}>
+                  <Link to={`${book.permalink}/${book.id}`}>
                     <div className='img-wrapper'>
                       <img src={book.image?.url} alt="book img" className="shadow-sm" />
                     </div>
                   </Link>
                   <div className="details-wrapper">
-                    <Link to={`books/${book.name}/${book.id}`} className='nav-link'>
+                    <Link to={`${book.permalink}/${book.id}})}`} className='nav-link'>
                       <p className='fw-bold lead book-title'>{book.name}</p>
                     </Link>
                     <div className="details">

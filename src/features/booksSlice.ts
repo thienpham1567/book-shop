@@ -1,5 +1,5 @@
 import { Product as Book } from '@chec/commerce.js/types/product.js';
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { commerce } from '../lib/commerce.js';
 
 export const fetchBooks = createAsyncThunk(
@@ -47,5 +47,5 @@ export const booksSlice = createSlice({
   },
 });
 
-export const { getBooksByCategory } = booksSlice.actions;
+export const {} = booksSlice.actions;
 export default booksSlice.reducer;
