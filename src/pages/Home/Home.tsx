@@ -72,7 +72,7 @@ const Home = () => {
             <h1 className='header-text'>Romance</h1>
           </Col>
           <Col xs={12} lg={3} className="text-end">
-            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill w-100" onClick={() => navigate('categories/fiction/romance')}>View List ({romance.length} books)</Button>
+            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill" onClick={() => navigate('categories/fiction/romance')}>View List ({romance.length} books)</Button>
           </Col>
           {
             loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>

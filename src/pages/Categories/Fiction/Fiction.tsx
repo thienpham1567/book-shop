@@ -19,9 +19,13 @@ const Fiction = () => {
   const outlet = useOutlet();
   const dispatch = useDispatch();
   const { books, loading, error } = useSelector((state: RootState) => state.books);
+  const { cart } = useSelector(
+    (state: RootState) => state.cart,
+  );
   const [fiction, setFiction] = useState<Book[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [booksPerPage, setBookPerPage] = useState(8);
+  const [booksAtCart, setBooksAtCart] = useState<string[]>([]);
 
   // Get current books
   const indexOfLastBook = currentPage * booksPerPage;
@@ -30,18 +34,22 @@ const Fiction = () => {
 
   useEffect(() => {
     dispatch(fetchBooks());
+    bookAtShoppingCart();
   }, [])
 
   useEffect(() => {
     setFiction(getBooksByCategory(books, { categories: ['fiction', category ? category : ''] }));
-  }, [books, category])
+    bookAtShoppingCart();
+  }, [books, category, cart])
 
   const paginate = (numberPage: number): void => {
     setCurrentPage(numberPage);
   }
 
-  const addBook = (bookId: string, quantity: number) => {
-    dispatch(addBookToCart({ id: bookId, quantity: quantity }));
+  const bookAtShoppingCart = () => {
+    const itemsAtCart = cart?.line_items?.map((item) => item.product_id);
+    console.log(itemsAtCart);
+    setBooksAtCart(booksAtCart.concat(itemsAtCart));
   }
 
   return (
@@ -70,10 +78,20 @@ const Fiction = () => {
                       <p className='fw-normal mt-1'>{book.price.formatted_with_symbol}</p>
                     </div>
                   </div>
-                  <Button variant="danger" className="d-flex align-items-center justify-content-center gap-2 w-100 rounded-pill" onClick={() => dispatch(addBookToCart({ id: book.id, quantity: 1 }))}>
-                    <i className="fa-solid fa-cart-shopping"></i>
-                    <p className='text-light fw-semibold text-uppercase'>Add to cart</p>
-                  </Button>
+                  {booksAtCart.includes(book.id) ? <Button variant="outline-danger" className="w-100 rounded-pill">
+                    <div className="d-flex align-items-center justify-content-center gap-2 ">
+                      <i className="fa-solid fa-cart-shopping"></i>
+                      <p className='fw-semibold text-uppercase'>In Cart</p>
+                    </div>
+                  </Button> : <Button variant="danger" className="d-flex align-items-center justify-content-center gap-2 w-100 rounded-pill" onClick={() => {
+                    dispatch(addBookToCart({ id: book.id, quantity: 1 }));
+                    setBooksAtCart([...booksAtCart, book.id]);
+                  }}>
+                    <div className="d-flex align-items-center justify-content-center gap-2 ">
+                      <i className="fa-solid fa-cart-shopping"></i>
+                      <p className='text-light fw-semibold text-uppercase'>Add to cart</p>
+                    </div>
+                  </Button>}
                 </Col>))}
               </Row>
               <Row className='mt-5'>
