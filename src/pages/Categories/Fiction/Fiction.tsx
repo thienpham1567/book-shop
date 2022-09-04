@@ -8,6 +8,7 @@ import { addBookToCart } from '../../../features/cartSlice';
 import { Product as Book } from '@chec/commerce.js/types/product';
 import { getBooksByCategory } from '../../../utils';
 import '../Category.scss';
+import { useNavigate } from 'react-router-dom';
 import PaginationBar from '../../../components/Pagination/PaginationBar';
 interface AuthorsState {
   bookId: string;
@@ -18,10 +19,9 @@ const Fiction = () => {
   const { category } = useParams();
   const outlet = useOutlet();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { books, loading, error } = useSelector((state: RootState) => state.books);
-  const { cart } = useSelector(
-    (state: RootState) => state.cart,
-  );
+  const { cart } = useSelector((state: RootState) => state.cart);
   const [fiction, setFiction] = useState<Book[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [booksPerPage, setBookPerPage] = useState(8);
@@ -40,7 +40,7 @@ const Fiction = () => {
   useEffect(() => {
     setFiction(getBooksByCategory(books, { categories: ['fiction', category ? category : ''] }));
     bookAtShoppingCart();
-  }, [books, category, cart])
+  }, [books, category])
 
   const paginate = (numberPage: number): void => {
     setCurrentPage(numberPage);
@@ -48,7 +48,6 @@ const Fiction = () => {
 
   const bookAtShoppingCart = () => {
     const itemsAtCart = cart?.line_items?.map((item) => item.product_id);
-    console.log(itemsAtCart);
     setBooksAtCart(booksAtCart.concat(itemsAtCart));
   }
 
@@ -78,7 +77,7 @@ const Fiction = () => {
                       <p className='fw-normal mt-1'>{book.price.formatted_with_symbol}</p>
                     </div>
                   </div>
-                  {booksAtCart.includes(book.id) ? <Button variant="outline-danger" className="w-100 rounded-pill">
+                  {booksAtCart.includes(book.id) ? <Button variant="outline-danger" className="w-100 rounded-pill" onClick={() => navigate('/cart')}>
                     <div className="d-flex align-items-center justify-content-center gap-2 ">
                       <i className="fa-solid fa-cart-shopping"></i>
                       <p className='fw-semibold text-uppercase'>In Cart</p>

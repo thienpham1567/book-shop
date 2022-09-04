@@ -7,6 +7,12 @@
 body {
   font-family: "Poppins", sans-serif !important;
   overflow-y: scroll;
+
+  .btn {
+    &:focus {
+      box-shadow: none;
+    }
+  }
 }
 
 body::-webkit-scrollbar {
