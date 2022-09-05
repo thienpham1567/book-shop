@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Fragment } from 'react'
-import './Home.scss'
+import React, { useState, useEffect, Fragment } from 'react';
+import './Home.scss';
 import Banner1 from '../../assets/image/banner1.jpg';
 import Banner2 from '../../assets/image/banner2.jpg';
 import Banner3 from '../../assets/image/banner3.jpg';
@@ -10,12 +10,19 @@ import ComicIcon from '../../assets/image/comic.png';
 import MangaIcon from '../../assets/image/manga.png';
 import HistoryIcon from '../../assets/image/history.png';
 import Slider from 'react-slick';
-import { Container, Row, Col, Button, Spinner, Carousel } from 'react-bootstrap';
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Spinner,
+  Carousel,
+} from 'react-bootstrap';
 import { fetchBooks } from '../../features/booksSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../app/store';
 import { Product as Book } from '@chec/commerce.js/types/product.js';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 import { getBooksByCategory } from '../../utils/index';
 
 const banners = [Banner1, Banner2, Banner3];
@@ -25,10 +32,12 @@ const Home = () => {
     infinite: true,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 1
+    slidesToScroll: 1,
   };
   const navigate = useNavigate();
-  const { books, loading, error } = useSelector((state: RootState) => state.books);
+  const { books, loading, error } = useSelector(
+    (state: RootState) => state.books,
+  );
   const dispatch = useDispatch();
   const [fantasy, setFantasy] = useState<Book[]>([]);
   const [romance, setRomance] = useState<Book[]>([]);
@@ -39,153 +48,280 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchBooks());
-  }, [])
+  }, []);
 
   useEffect(() => {
-    setFantasy(getBooksByCategory(books, { categories: ['fiction', 'fantasy'] }));
-    setRomance(getBooksByCategory(books, { categories: ['fiction', 'romance'] }));
-    setComicAndGraphicNovel(getBooksByCategory(books, { categories: ['fiction', 'comics-graphic-novels'] }));
+    setFantasy(
+      getBooksByCategory(books, { categories: ['fiction', 'fantasy'] }),
+    );
+    setRomance(
+      getBooksByCategory(books, { categories: ['fiction', 'romance'] }),
+    );
+    setComicAndGraphicNovel(
+      getBooksByCategory(books, {
+        categories: ['fiction', 'comics-graphic-novels'],
+      }),
+    );
     setHorror(getBooksByCategory(books, { categories: ['fiction', 'horror'] }));
     setManga(getBooksByCategory(books, { categories: ['fiction', 'manga'] }));
-    setHistory(getBooksByCategory(books, { categories: ['fiction', 'historical-fiction'] }));
-  }, [books])
+    setHistory(
+      getBooksByCategory(books, {
+        categories: ['fiction', 'historical-fiction'],
+      }),
+    );
+  }, [books]);
 
   return (
     <Fragment>
       <Carousel>
-        {
-          banners.map((banner, index) => (<Carousel.Item key={index} interval={3000}>
-            <img
-              className="d-block w-100"
-              src={banner}
-              alt="First slide"
-            />
-          </Carousel.Item>))
-        }
+        {banners.map((banner, index) => (
+          <Carousel.Item key={index} interval={3000}>
+            <img className="d-block w-100" src={banner} alt="First slide" />
+          </Carousel.Item>
+        ))}
       </Carousel>
-      <Container className='pt-5'>
-
+      <Container className="pt-5" fluid="lg">
         {/* Romance */}
         <Row className="align-items-center">
-          <Col xs={12} lg={9} className='d-flex align-items-center gap-3 mb-2'>
+          <Col xs={12} lg={8} className="d-flex align-items-center gap-3 mb-2">
             <img src={RomanceIcon} alt="romance icon" />
-            <h1 className='header-text'>Romance</h1>
+            <h1 className="header-text">Romance</h1>
           </Col>
-          <Col xs={12} lg={3} className="text-end">
-            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill" onClick={() => navigate('categories/fiction/romance')}>View List ({romance.length} books)</Button>
+          <Col xs={12} lg={4} className="text-end">
+            <Button
+              variant="danger"
+              className="text-uppercase fw-semibold rounded-pill px-4 w-100"
+              onClick={() => navigate('categories/fiction/romance')}
+            >
+              View List ({romance.length} books)
+            </Button>
           </Col>
-          {
-            loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>
-              {romance.map((book) => (<Col xs={3} key={book.id}>
-                <Link to={`categories/fiction/romance/${book.name}/${book.id}`}>
-                  <img src={book.image?.url} alt="book img" className="img-custom" />
-                </Link>
-              </Col>))}
+          {loading ? (
+            <Spinner
+              animation="border"
+              variant="secondary"
+              className="mx-auto mt-5"
+            />
+          ) : (
+            <Slider {...settings} className="shadow p-2">
+              {romance.map((book) => (
+                <Col xs={3} key={book.id}>
+                  <Link
+                    to={`categories/fiction/romance/${book.name}/${book.id}`}
+                  >
+                    <img
+                      src={book.image?.url}
+                      alt="book img"
+                      className="img-custom"
+                    />
+                  </Link>
+                </Col>
+              ))}
             </Slider>
-          }
+          )}
         </Row>
         {/* Fantasy */}
         <Row className="align-items-center mt-5">
-          <Col xs={12} lg={9} className='d-flex align-items-center gap-3 mb-2'>
+          <Col xs={12} lg={8} className="d-flex align-items-center gap-3 mb-2">
             <img src={FantasyIcon} alt="romance icon" />
-            <h1 className='header-text'>Fantasy</h1>
+            <h1 className="header-text">Fantasy</h1>
           </Col>
-          <Col xs={12} lg={3} className="text-end">
-            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill w-100" onClick={() => navigate('categories/fiction/fantasy')}>View List ({fantasy.length} books)</Button>
+          <Col xs={12} lg={4} className="text-end">
+            <Button
+              variant="danger"
+              className="text-uppercase fw-semibold rounded-pill px-4 w-100"
+              onClick={() => navigate('categories/fiction/fantasy')}
+            >
+              View List ({fantasy.length} books)
+            </Button>
           </Col>
-          {
-            loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>
-              {fantasy.map((book) => (<Col xs={3} key={book.id}>
-                <Link to={`categories/fiction/fantasy/${book.name}/${book.id}`}>
-                  <img src={book.image?.url} alt="book img" className="img-custom" />
-                </Link>
-              </Col>))}
+          {loading ? (
+            <Spinner
+              animation="border"
+              variant="secondary"
+              className="mx-auto mt-5"
+            />
+          ) : (
+            <Slider {...settings} className="shadow p-2">
+              {fantasy.map((book) => (
+                <Col xs={3} key={book.id}>
+                  <Link
+                    to={`categories/fiction/fantasy/${book.name}/${book.id}`}
+                  >
+                    <img
+                      src={book.image?.url}
+                      alt="book img"
+                      className="img-custom"
+                    />
+                  </Link>
+                </Col>
+              ))}
             </Slider>
-          }
+          )}
         </Row>
 
         {/* History */}
         <Row className="align-items-center mt-5">
-          <Col xs={12} lg={9} className='d-flex align-items-center gap-3 mb-2'>
+          <Col xs={12} lg={8} className="d-flex align-items-center gap-3 mb-2">
             <img src={HistoryIcon} alt="romance icon" />
-            <h1 className='header-text'>History</h1>
+            <h1 className="header-text">History</h1>
           </Col>
-          <Col xs={12} lg={3} className="text-end">
-            <Button variant='danger' className="text-uppercase fw-semibold rounded-pill w-100" onClick={() => navigate('categories/fiction/historical-fiction')}>View List ({history.length} books)</Button>
+          <Col xs={12} lg={4} className="text-end">
+            <Button
+              variant="danger"
+              className="text-uppercase fw-semibold rounded-pill px-4 w-100"
+              onClick={() => navigate('categories/fiction/historical-fiction')}
+            >
+              View List ({history.length} books)
+            </Button>
           </Col>
-          {
-            loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>
-              {history.map((book) => (<Col xs={3} key={book.id}>
-                <Link to={`categories/fiction/historical-fiction/${book.name}/${book.id}`}>
-                  <img src={book.image?.url} alt="book img" className="img-custom" />
-                </Link>
-              </Col>))}
+          {loading ? (
+            <Spinner
+              animation="border"
+              variant="secondary"
+              className="mx-auto mt-5"
+            />
+          ) : (
+            <Slider {...settings} className="shadow p-2">
+              {history.map((book) => (
+                <Col xs={3} key={book.id}>
+                  <Link
+                    to={`categories/fiction/historical-fiction/${book.name}/${book.id}`}
+                  >
+                    <img
+                      src={book.image?.url}
+                      alt="book img"
+                      className="img-custom"
+                    />
+                  </Link>
+                </Col>
+              ))}
             </Slider>
-          }
+          )}
         </Row>
 
         {/* Horror */}
         <Row className="align-items-center mt-5">
-          <Col xs={12} lg={9} className='d-flex align-items-center gap-3 mb-2'>
+          <Col xs={12} lg={8} className="d-flex align-items-center gap-3 mb-2">
             <img src={HorrorIcon} alt="romance icon" />
-            <h1 className='header-text'>Horror</h1>
+            <h1 className="header-text">Horror</h1>
           </Col>
-          <Col xs={12} lg={3} className="text-end">
-            <Button variant='danger' className="w-100 text-uppercase fw-semibold rounded-pill" onClick={() => navigate('categories/fiction/horror')}>View List ({horror.length} books)</Button>
+          <Col xs={12} lg={4} className="text-end">
+            <Button
+              variant="danger"
+              className="text-uppercase fw-semibold rounded-pill px-4 w-100"
+              onClick={() => navigate('categories/fiction/horror')}
+            >
+              View List ({horror.length} books)
+            </Button>
           </Col>
-          {
-            loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>
-              {horror.map((book) => (<Col xs={3} key={book.id}>
-                <Link to={`categories/fiction/horror/${book.name}/${book.id}`}>
-                  <img src={book.image?.url} alt="book img" className="img-custom" />
-                </Link>
-              </Col>))}
+          {loading ? (
+            <Spinner
+              animation="border"
+              variant="secondary"
+              className="mx-auto mt-5"
+            />
+          ) : (
+            <Slider {...settings} className="shadow p-2">
+              {horror.map((book) => (
+                <Col xs={3} key={book.id}>
+                  <Link
+                    to={`categories/fiction/horror/${book.name}/${book.id}`}
+                  >
+                    <img
+                      src={book.image?.url}
+                      alt="book img"
+                      className="img-custom"
+                    />
+                  </Link>
+                </Col>
+              ))}
             </Slider>
-          }
+          )}
         </Row>
 
         {/* Manga */}
         <Row className="align-items-center mt-5">
-          <Col xs={12} lg={9} className='d-flex align-items-center gap-3 mb-2'>
+          <Col xs={12} lg={8} className="d-flex align-items-center gap-3 mb-2">
             <img src={MangaIcon} alt="romance icon" />
-            <h1 className='header-text'>Manga</h1>
+            <h1 className="header-text">Manga</h1>
           </Col>
-          <Col xs={12} lg={3} className="text-end">
-            <Button variant='danger' className="w-100 text-uppercase fw-semibold rounded-pill" onClick={() => navigate('categories/fiction/manga')}>View List ({manga.length} books)</Button>
+          <Col xs={12} lg={4} className="text-end">
+            <Button
+              variant="danger"
+              className="text-uppercase fw-semibold rounded-pill px-4 w-100"
+              onClick={() => navigate('categories/fiction/manga')}
+            >
+              View List ({manga.length} books)
+            </Button>
           </Col>
-          {
-            loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>
-              {manga.map((book) => (<Col xs={3} key={book.id}>
-                <Link to={`categories/fiction/manga/${book.name}/${book.id}`}>
-                  <img src={book.image?.url} alt="book img" className="img-custom" />
-                </Link>
-              </Col>))}
+          {loading ? (
+            <Spinner
+              animation="border"
+              variant="secondary"
+              className="mx-auto mt-5"
+            />
+          ) : (
+            <Slider {...settings} className="shadow p-2">
+              {manga.map((book) => (
+                <Col xs={3} key={book.id}>
+                  <Link to={`categories/fiction/manga/${book.name}/${book.id}`}>
+                    <img
+                      src={book.image?.url}
+                      alt="book img"
+                      className="img-custom"
+                    />
+                  </Link>
+                </Col>
+              ))}
             </Slider>
-          }
+          )}
         </Row>
 
         {/* Comic & Graphic novels */}
         <Row className="align-items-center mt-5">
-          <Col xs={12} lg={9} className='d-flex align-items-center gap-3 mb-2'>
+          <Col xs={12} lg={8} className="d-flex align-items-center gap-3 mb-2">
             <img src={ComicIcon} alt="romance icon" />
-            <h1 className='header-text'>Comic & Graphic Novels</h1>
+            <h1 className="header-text">Comic & Graphic Novels</h1>
           </Col>
-          <Col xs={12} lg={3} className="text-end">
-            <Button variant='danger' className="w-100 text-uppercase fw-semibold rounded-pill" onClick={() => navigate('categories/fiction/comics-graphic-novels')}>View List ({comicAndGraphicNovel.length} books)</Button>
+          <Col xs={12} lg={4} className="text-end">
+            <Button
+              variant="danger"
+              className="text-uppercase fw-semibold rounded-pill px-4 w-100"
+              onClick={() =>
+                navigate('categories/fiction/comics-graphic-novels')
+              }
+            >
+              View List ({comicAndGraphicNovel.length} books)
+            </Button>
           </Col>
-          {
-            loading ? <Spinner animation='border' variant='secondary' className="mx-auto mt-5" /> : <Slider {...settings} className='shadow p-2'>
-              {comicAndGraphicNovel.map((book) => (<Col xs={3} key={book.id}>
-                <Link to={`categories/fiction/comics-graphic-novels/${book.name}/${book.id}`}>
-                  <img src={book.image?.url} alt="book img" className="img-custom" />
-                </Link>
-              </Col>))}
+          {loading ? (
+            <Spinner
+              animation="border"
+              variant="secondary"
+              className="mx-auto mt-5"
+            />
+          ) : (
+            <Slider {...settings} className="shadow p-2">
+              {comicAndGraphicNovel.map((book) => (
+                <Col xs={3} key={book.id}>
+                  <Link
+                    to={`categories/fiction/comics-graphic-novels/${book.name}/${book.id}`}
+                  >
+                    <img
+                      src={book.image?.url}
+                      alt="book img"
+                      className="img-custom"
+                    />
+                  </Link>
+                </Col>
+              ))}
             </Slider>
-          }
+          )}
         </Row>
       </Container>
     </Fragment>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

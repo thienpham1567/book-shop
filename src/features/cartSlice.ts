@@ -7,11 +7,10 @@ export const fetchCart = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const cart = await commerce.cart.retrieve();
-      console.log(cart);
       return cart;
     } catch (error) {
       throw thunkAPI.rejectWithValue(
-        'Got error when fetched cart from commerce',
+        'Got error while fetching cart from commerce',
       );
     }
   },
@@ -25,7 +24,37 @@ export const addBookToCart = createAsyncThunk(
       return cart;
     } catch (error) {
       throw thunkAPI.rejectWithValue(
-        'Got error when added book to cart from commerce',
+        'Got error while adding book to cart from commerce',
+      );
+    }
+  },
+);
+
+export const updateBookCart = createAsyncThunk(
+  'cart/updateBookCartStatus',
+  async (params: { id: string; quantity: number }, thunkAPI) => {
+    try {
+      const { cart } = await commerce.cart.update(params.id, {
+        quantity: params.quantity,
+      });
+      return cart;
+    } catch (error) {
+      throw thunkAPI.rejectWithValue(
+        'Got error while updating book to cart from commerce',
+      );
+    }
+  },
+);
+
+export const deleteBookFromCart = createAsyncThunk(
+  'cart/deleteBookFromCartStatus',
+  async (idItem: string, thunkAPI) => {
+    try {
+      const { cart } = await commerce.cart.remove(idItem);
+      return cart;
+    } catch (error) {
+      throw thunkAPI.rejectWithValue(
+        'Got error while deleting book to cart from commerce',
       );
     }
   },
@@ -39,7 +68,7 @@ export const emptyCart = createAsyncThunk(
       return cart;
     } catch (error) {
       throw thunkAPI.rejectWithValue(
-        'Got error when made cart empty from commerce',
+        'Got error while making cart empty from commerce',
       );
     }
   },
@@ -75,6 +104,14 @@ export const cartSlice = createSlice({
       console.log('add');
     });
     builder.addCase(addBookToCart.fulfilled, (state, action) => {
+      state.loading = false;
+      state.cart = action.payload;
+    });
+    builder.addCase(updateBookCart.fulfilled, (state, action) => {
+      state.loading = false;
+      state.cart = action.payload;
+    });
+    builder.addCase(deleteBookFromCart.fulfilled, (state, action) => {
       state.loading = false;
       state.cart = action.payload;
     });

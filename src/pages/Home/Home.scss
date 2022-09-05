@@ -8,7 +8,7 @@
   }
 }
 
-.container {
+.container-lg {
   .row {
     .slick-slider {
       border-radius: 10px;
@@ -47,6 +47,30 @@
       font-weight: 600;
       color: rgb(50, 0, 50);
       line-height: 2.6rem;
+    }
+  }
+}
+
+@media screen and (max-width:992px) {
+  .container-lg {
+    .row {
+      gap: .5rem;
+
+      .slick-slider {
+
+        .slick-next {
+          visibility: hidden;
+        }
+
+        .slick-prev {
+          visibility: hidden;
+        }
+
+        .img-custom {
+          width: 8rem;
+          height: 11.5rem;
+        }
+      }
     }
   }
 }

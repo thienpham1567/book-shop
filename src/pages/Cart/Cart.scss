@@ -2,6 +2,10 @@
   padding: 2rem 10rem;
 
   .card {
+    background-color: rgb(250, 250, 250);
+    border: none;
+    border-radius: 10px;
+
     .card-body {
       .row {
         border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -12,6 +16,29 @@
           width: 8.5rem;
           height: 12rem;
           border-radius: 5px;
+        }
+
+        .quantity {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+
+          :first-child {
+            cursor: pointer;
+            color: rgb(95, 95, 95);
+          }
+
+          :last-child {
+            cursor: pointer;
+            color: rgb(95, 95, 95);
+          }
+
+          :nth-child(2) {
+            font-size: 1.3rem;
+            font-weight: 500;
+            width: 1.5rem;
+            text-align: center;
+          }
         }
       }
     }
