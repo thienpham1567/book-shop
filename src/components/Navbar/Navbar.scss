@@ -52,6 +52,11 @@
         .btn {
           width: 6.2rem;
           font-size: .8rem;
+          box-shadow: none;
+
+          &:focus {
+            box-sizing: none;
+          }
         }
 
         .cart {
@@ -86,9 +91,8 @@
         font-size: 1.2rem;
         border: none;
 
-        &:focus,
-        :active {
-          border: none !important;
+        &:focus {
+          box-shadow: none;
         }
 
       }
