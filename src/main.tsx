@@ -12,6 +12,7 @@ import Fiction from './pages/Categories/Fiction/Fiction';
 import Book from './components/Book/Book';
 import Cart from './pages/Cart/Cart';
 import SearchBooksList from './pages/SearchBooksList/SearchBooksList';
+import Checkout from './pages/Checkout/Checkout';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             <Route index element={<Home />} />
             <Route path="search/" element={<SearchBooksList />} />
             <Route path="cart" element={<Cart />} />
+            <Route path="checkout" element={<Checkout />} />
             <Route path="categories/fiction" element={<Fiction />}>
               <Route path=":title/:id" element={<Book />} />
               <Route path=":category/" element={<Fiction />}>

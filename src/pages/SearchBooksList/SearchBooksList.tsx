@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams, Link, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -27,6 +27,7 @@ const SearchBooksList = () => {
 
   useEffect(() => {
     dispatch(fetchBooks());
+    setResults(getBooksListByTitle(books, query));
   }, []);
 
   useEffect(() => {
