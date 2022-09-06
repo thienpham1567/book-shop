@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { Cart } from '@chec/commerce.js/types/cart';
 import { commerce } from '../lib/commerce';
 
@@ -76,12 +76,14 @@ export const emptyCart = createAsyncThunk(
 
 interface CartState {
   cart: Cart;
+  itemIdsAtCart: string[];
   loading: boolean;
   error: string;
 }
 
 const initialState: CartState = {
   cart: {} as Cart,
+  itemIdsAtCart: [],
   loading: false,
   error: '',
 };
@@ -89,7 +91,15 @@ const initialState: CartState = {
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
-  reducers: {},
+  reducers: {
+    insertItemId: (state, action: PayloadAction<string>): void => {
+      if (action.payload) {
+        console.log(action.payload);
+        state.itemIdsAtCart = state.itemIdsAtCart.concat(action.payload);
+        console.log(state.itemIdsAtCart);
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchCart.pending, (state) => {
       state.loading = true;
@@ -122,5 +132,5 @@ export const cartSlice = createSlice({
   },
 });
 
-export const {} = cartSlice.actions;
+export const { insertItemId } = cartSlice.actions;
 export default cartSlice.reducer;

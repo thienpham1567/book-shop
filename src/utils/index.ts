@@ -32,3 +32,15 @@ export const retrieveBookById = async (bookId: string): Promise<Book> => {
     throw error;
   }
 };
+
+export const getBooksListByTitle = (
+  books: Book[],
+  searchQuery: string,
+): Book[] => {
+  const results: Book[] = books.filter((book) =>
+    book.name.includes(searchQuery),
+  );
+  console.log(results);
+
+  return results;
+};

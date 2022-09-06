@@ -25,35 +25,39 @@ const PaginationBar: FC<PaginationProps> = ({
   return (
     <Pagination className="justify-content-center">
       <li className="page-item" onClick={() => paginate(1)}>
-        <Link to="/categories/fiction" className="page-link">
+        <p className="page-link">
           <i className="fa-solid fa-angles-left"></i>
-        </Link>
+        </p>
       </li>
       <li className="page-item" onClick={() => paginate(currentPage - 1)}>
-        <Link to="/categories/fiction" className="page-link">
+        <p className="page-link">
           <i className="fa-solid fa-angle-left"></i>
-        </Link>
+        </p>
       </li>
       {pageNumbers.map((number) => (
         <li className="page-item" key={number} onClick={() => paginate(number)}>
-          <Link
-            to="/categories/fiction"
-            className={`page-link ${currentPage === number ? ' active-link' : ''
-              }`}
+          <p
+            // to="/categories/fiction"
+            className={`page-link ${
+              currentPage === number ? ' active-link' : ''
+            }`}
           >
             {number}
-          </Link>
+          </p>
         </li>
       ))}
       <li className="page-item" onClick={() => paginate(currentPage + 1)}>
-        <Link to="/categories/fiction" className="page-link">
+        <p className="page-link">
           <i className="fa-solid fa-angle-right"></i>
-        </Link>
+        </p>
       </li>
-      <li className="page-item" onClick={() => paginate(Math.ceil(totalBooks / booksPerPage))}>
-        <Link to="/categories/fiction" className="page-link">
+      <li
+        className="page-item"
+        onClick={() => paginate(Math.ceil(totalBooks / booksPerPage))}
+      >
+        <p className="page-link">
           <i className="fa-solid fa-angles-right"></i>
-        </Link>
+        </p>
       </li>
     </Pagination>
   );

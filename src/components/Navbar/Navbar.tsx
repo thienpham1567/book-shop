@@ -1,4 +1,10 @@
-import React, { FC, useState, useEffect } from 'react';
+import {
+  ChangeEvent,
+  FC,
+  KeyboardEvent,
+  MouseEventHandler,
+  useState,
+} from 'react';
 import './Navbar.scss';
 import {
   Nav,
@@ -10,13 +16,31 @@ import {
   Button,
   Offcanvas,
 } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface NavbarProps {
-  totalBooks: number
+  totalBooks: number;
 }
 
 const NavBar: FC<NavbarProps> = ({ totalBooks }): JSX.Element => {
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleSearchQuery = (
+    event: KeyboardEvent<HTMLInputElement> | MouseEventHandler<HTMLElement>,
+  ) => {
+    if (
+      (event.key === 'Enter' || event.currentTarget.tagName === 'I') &&
+      searchQuery !== ''
+    ) {
+      navigate(`search?q=${searchQuery}`);
+      setSearchQuery('');
+    }
+  };
 
   return (
     <Navbar bg="light" expand="lg" className="px-2 shadow-sm fixed-top">
@@ -36,12 +60,17 @@ const NavBar: FC<NavbarProps> = ({ totalBooks }): JSX.Element => {
             <div className="search-input w-100">
               <Form.Control
                 type="text"
-                id="search"
                 size="lg"
-                placeholder="Search books,authors"
-                aria-describedby="Search books,authors"
+                placeholder="Search books"
+                aria-describedby="Search books"
+                onChange={handleOnChange}
+                onKeyUp={handleSearchQuery}
+                value={searchQuery}
               />
-              <i className="fa-solid fa-magnifying-glass"></i>
+              <i
+                className="fa-solid fa-magnifying-glass"
+                onClick={handleSearchQuery}
+              ></i>
             </div>
           </Col>
           <Col xs={7} lg={4}>

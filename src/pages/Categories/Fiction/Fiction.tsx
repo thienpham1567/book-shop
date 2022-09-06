@@ -4,16 +4,12 @@ import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app/store';
 import { fetchBooks } from '../../../features/booksSlice';
-import { addBookToCart } from '../../../features/cartSlice';
+import { addBookToCart, insertItemId } from '../../../features/cartSlice';
 import { Product as Book } from '@chec/commerce.js/types/product';
 import { getBooksByCategory } from '../../../utils';
 import '../Category.scss';
 import { useNavigate } from 'react-router-dom';
 import PaginationBar from '../../../components/Pagination/PaginationBar';
-interface AuthorsState {
-  bookId: string;
-  authors: string[];
-}
 
 const Fiction = () => {
   const { category } = useParams();
@@ -23,11 +19,10 @@ const Fiction = () => {
   const { books, loading, error } = useSelector(
     (state: RootState) => state.books,
   );
-  const { cart } = useSelector((state: RootState) => state.cart);
+  const { cart, itemIdsAtCart } = useSelector((state: RootState) => state.cart);
   const [fiction, setFiction] = useState<Book[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [booksPerPage, setBookPerPage] = useState(8);
-  const [booksAtCart, setBooksAtCart] = useState<string[]>([]);
 
   // Get current books
   const indexOfLastBook = currentPage * booksPerPage;
@@ -36,7 +31,6 @@ const Fiction = () => {
 
   useEffect(() => {
     dispatch(fetchBooks());
-    bookAtShoppingCart();
   }, []);
 
   useEffect(() => {
@@ -54,12 +48,12 @@ const Fiction = () => {
 
   const bookAtShoppingCart = () => {
     const itemsAtCart = cart?.line_items?.map((item) => item.product_id);
-    setBooksAtCart(booksAtCart.concat(itemsAtCart));
+    dispatch(insertItemId(itemsAtCart));
   };
 
   const addBook = (data: { id: string; quantity: number }): void => {
     dispatch(addBookToCart(data));
-    setBooksAtCart(booksAtCart.concat(data.id));
+    dispatch(insertItemId(data.id));
   };
 
   return (
@@ -102,7 +96,7 @@ const Fiction = () => {
                         </p>
                       </div>
                     </div>
-                    {booksAtCart.includes(book.id) ? (
+                    {itemIdsAtCart.includes(book.id) ? (
                       <Button
                         variant="outline-danger"
                         className="w-100 rounded-pill"
