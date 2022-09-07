@@ -1,5 +1,5 @@
-import { Fragment, useState, useEffect } from 'react';
-import { Container, Row, Col, Button, Spinner, Card } from 'react-bootstrap';
+import { Fragment, useEffect } from 'react';
+import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import './Cart.scss';
 import {
   fetchCart,
@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../app/store';
 import EmptyCartIcon from '../../assets/image/basket.png';
 import { useNavigate } from 'react-router-dom';
-import { SassString } from 'sass';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -41,10 +40,14 @@ const Cart = () => {
     dispatch(emptyCart());
   };
 
+  const navigateCheckout = () => {
+    navigate('/checkout');
+  };
+
   return (
     <Fragment>
       <Container fluid="lg">
-        <p className="display-6 fw-normal py-4 ">Shopping Cart</p>
+        <p className="display-6 fw-normal py-4 ">Your Cart</p>
         {cart?.line_items?.length <= 0 ? (
           <div className="text-center">
             <img src={EmptyCartIcon} alt="empty cart" />
@@ -58,7 +61,7 @@ const Cart = () => {
             </Button>
           </div>
         ) : (
-          <Card className="shadow py-4">
+          <Card className="shadow py-4 items-cart">
             <Card.Body>
               {/*checkout btn*/}
               <Row className="checkout justify-content-between align-items-center mb-3">
@@ -75,6 +78,7 @@ const Cart = () => {
                   <Button
                     variant="danger"
                     className="text-uppercase fw-semibold"
+                    onClick={navigateCheckout}
                   >
                     Checkout (Total: {cart?.subtotal?.formatted_with_symbol})
                   </Button>
@@ -99,7 +103,7 @@ const Cart = () => {
                         <div className="content">
                           <p className="lead fw-normal">{item.name}</p>
                           <p className="text-secondary">
-                            {item.price.formatted_with_symbol} |{' '}
+                            {item.price.formatted_with_symbol} |
                             <span className="text-success fw-semibold">
                               In Stock
                             </span>
