@@ -2,21 +2,51 @@ import { useState, useEffect } from 'react';
 import { Stepper, Step, StepLabel } from '@material-ui/core';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import './Checkout.scss';
-import AddressForm from '../../components/AddressForm/AddressForm';
-import PaymentForm from '../../components/PaymentForm/PaymentForm';
-import { commerce } from '../../lib/commerce';
+import AddressForm from '../../components/CheckoutForm/AddressForm/AddressForm';
+import PaymentForm from '../../components/CheckoutForm/PaymentForm/PaymentForm';
+import ReviewOrder from '../../components/CheckoutForm/ReviewOrder/ReviewOrder';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../app/store';
+import { fetchCheckoutToken } from '../../features/checkoutTokenSlice';
+import { CheckoutToken } from '@chec/commerce.js/types/checkout-token';
 
-const steps = ['ADDRESS', 'PAYMENT'];
+const steps = ['Shipping', 'Payment', 'Review'];
+
+export interface CheckoutFormProps {
+  checkoutToken: CheckoutToken;
+}
 
 const Checkout = () => {
+  const dispatch = useDispatch();
+  const { cart } = useSelector((state: RootState) => state.cart);
+  const { token, loading, error } = useSelector(
+    (state: RootState) => state.checkoutToken,
+  );
   const [activeStep, setActiveStep] = useState(0);
+
+  useEffect(() => {
+    dispatch(fetchCheckoutToken({ cartId: cart?.id, type: 'cart' }));
+  }, []);
 
   const nextStep = () => {};
 
   const backStep = () => {};
 
-  const FormCheckout = (): JSX.Element =>
-    activeStep === 0 ? <AddressForm /> : <PaymentForm />;
+  const FormCheckout = (): JSX.Element => {
+    let form: JSX.Element = <></>;
+    switch (activeStep) {
+      case 0:
+        form = <AddressForm />;
+        break;
+      case 1:
+        form = <PaymentForm />;
+        break;
+      case 2:
+        form = <ReviewOrder />;
+        break;
+    }
+    return form;
+  };
 
   return (
     <Container
@@ -31,12 +61,7 @@ const Checkout = () => {
             </Step>
           ))}
         </Stepper>
-        <FormCheckout />
-      </Card>
-      <Card className="order-summary shadow">
-        <Card.Body>
-          <p className="fs-4 fw-semibold text-secondary">Order summary</p>
-        </Card.Body>
+        <FormCheckout checkoutToken={token} />
       </Card>
     </Container>
   );

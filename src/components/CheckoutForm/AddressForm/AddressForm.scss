@@ -14,7 +14,7 @@
 
       .form-label {
         margin-bottom: .1rem;
-        color: rgb(100, 100, 110);
+        color: rgb(70, 70, 80);
       }
 
       .form-control {
@@ -29,5 +29,29 @@
       }
     }
 
+  }
+
+  .btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+}
+
+@media screen and (max-width:576px) {
+  .wrapper {
+    .form-layout {
+      flex-direction: column;
+    }
+
+    .btns {
+      flex-direction: column;
+      gap: .5rem;
+
+      button {
+        width: 100%;
+      }
+    }
   }
 }

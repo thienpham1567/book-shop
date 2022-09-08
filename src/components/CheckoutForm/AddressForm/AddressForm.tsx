@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { FC, useState, useEffect } from 'react';
 import './AddressForm.scss';
 import { Form, Button } from 'react-bootstrap';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { commerce } from '../../lib/commerce';
+import { commerce } from '../../../lib/commerce';
+import { CheckoutFormProps } from '../../../pages/Checkout/Checkout';
 
 interface ShippingInputs {
   firstName: string;
@@ -16,7 +17,11 @@ interface ShippingInputs {
   subdivision: string;
 }
 
-const AddressForm = () => {
+interface SelectionType {
+  [name: string]: string;
+}
+
+const AddressForm: FC<CheckoutFormProps> = ({ checkoutToken }): JSX.Element => {
   const navigate = useNavigate();
   const {
     register,
@@ -24,27 +29,41 @@ const AddressForm = () => {
     formState: { errors },
   } = useForm<ShippingInputs>();
 
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState<SelectionType>({ name: '' });
   const [country, setCountry] = useState('');
-  const [subdivisions, setSubdivisions] = useState([]);
+  const [subdivisions, setSubdivisions] = useState<SelectionType>({ name: '' });
   const [subdivision, setSubdivision] = useState('');
 
-  const fetchCountries = async () => {
+  const fetchCountries = async (): Promise<void> => {
     try {
-      // const data = commerce.services.localeListShippingCountries();
+      const { countries } = await commerce.services.localeListShippingCountries(
+        checkoutToken?.id,
+      );
+      setCountries(countries);
+      setCountry(Object.keys(countries)[0]);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 
-  const fetchSubdivisions = async () => {};
+  const fetchSubdivisions = async (countryCode: string): Promise<void> => {
+    try {
+      const { subdivisions } = await commerce.services.localeListSubdivisions(
+        countryCode,
+      );
+      console.log(subdivisions);
+    } catch (error) {
+      throw error;
+    }
+  };
 
   useEffect(() => {
     fetchCountries();
-    fetchSubdivisions();
   }, []);
 
-  useEffect(() => {}, [country]);
+  useEffect(() => {
+    fetchSubdivisions(country);
+  }, [country]);
 
   const onSubmit: SubmitHandler<ShippingInputs> = (data) => {
     console.log(data);
@@ -151,16 +170,22 @@ const AddressForm = () => {
           </Form.Select>
         </Form.Group>
       </div>
-      <div className="d-flex align-items-center justify-content-between mt-4">
+      <div className="btns mt-4">
         <Button
           variant="outline-secondary"
-          className="text-uppercase"
+          className="d-flex align-items-center justify-content-center gap-2"
           onClick={() => navigate('/cart')}
         >
-          Back to cart
+          <i className="fa-solid fa-chevron-left"></i>
+          <p>Back to cart</p>
         </Button>
-        <Button variant="success" type="submit" className="text-uppercase">
-          Next
+        <Button
+          variant="dark"
+          type="submit"
+          className="d-flex align-items-center justify-content-center gap-2"
+        >
+          <p>Confirm and continue</p>
+          <i className="fa-solid fa-chevron-right"></i>
         </Button>
       </div>
     </Form>

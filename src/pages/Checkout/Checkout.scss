@@ -1,6 +1,6 @@
 main {
   .checkout-wrapper {
-    padding: 2rem 0;
+    padding: 2rem 4rem;
 
     .MuiStepper-root {
       padding: 1rem;
@@ -19,13 +19,10 @@ main {
 
     .checkout {
       height: fit-content;
-      width: 60%;
+      width: 100%;
       border: 1px solid rgba(0, 0, 0, 0.2);
-    }
-
-    .order-summary {
-      height: fit-content;
-      width: 40%;
+      border: none;
+      padding: 1rem;
     }
   }
 }
@@ -33,15 +30,7 @@ main {
 @media screen and (max-width:992px) {
   main {
     .checkout-wrapper {
-      padding: 2rem .5rem;
-
-      .checkout {
-        width: 65%;
-      }
-
-      .order-summary {
-        width: 35%;
-      }
+      padding: 2rem 1rem;
     }
   }
 }
@@ -50,14 +39,6 @@ main {
   main {
     .checkout-wrapper {
       padding: 2rem 1rem;
-
-      .checkout {
-        width: 100%;
-      }
-
-      .order-summary {
-        width: 100%;
-      }
     }
   }
 }

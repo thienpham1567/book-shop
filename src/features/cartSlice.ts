@@ -111,7 +111,6 @@ export const cartSlice = createSlice({
     builder.addCase(fetchCart.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload as string;
-      console.log('add');
     });
     builder.addCase(addBookToCart.fulfilled, (state, action) => {
       state.loading = false;
